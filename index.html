@@ -2848,7 +2848,7 @@ function envoyerSignalement() {
 <div class="gallery">
   <iframe src="Porfolio desing.pdf" width="300" height="420" style="border-radius:10px;border:1.5px solid #ddd;"></iframe>
   <p>
-    <a href="Porfiolo desing.pdf" target="_blank">Télécharger le PDF</a>
+    <a href="Porfolio desing.pdf" target="_blank">Télécharger le PDF</a>
   </p>
 </div>
 
@@ -2893,9 +2893,7 @@ function envoyerSignalement() {
       .contact-wrapper { flex-direction: column; align-items: stretch; }
     }
   </style>
-
   <div class="contact-wrapper">
-    <!-- Formulaire de contact -->
     <form class="contact-form" action="https://formsubmit.co/rhstrama@gmail.com" method="POST">
       <h3>Formulaire de contact</h3>
       <label for="nom">Nom :</label>
@@ -2910,12 +2908,11 @@ function envoyerSignalement() {
       <label for="message">Message :</label>
       <textarea id="message" name="Message" rows="3" required></textarea>
 
-      <!-- Redirection vers page de remerciement -->
-      <input type="hidden" name="_next" value="https://angie89100.github.io/Strategie-et-management/merci.html">
+      <!-- Option : rediriger vers une page de remerciement -->
+      <input type="hidden" name="_next" value="https://votresite.fr/merci.html">
       <button type="submit">Envoyer</button>
     </form>
 
-    <!-- Formulaire RDV -->
     <form class="calendar-contact" action="https://formsubmit.co/rhstrama@gmail.com" method="POST">
       <h4>Prendre un RDV</h4>
       <label for="date">Date souhaitée :</label>
@@ -2928,17 +2925,16 @@ function envoyerSignalement() {
       <input type="email" id="rdv-email" name="Email" required>
 
       <label for="rdv-telephone">Téléphone :</label>
-      <input type="text" id="rdv-telephone" name="Téléphone" pattern="^0[1-9][0-9]{8}$" placeholder="Ex : 067891011" required>
+      <input type="text" id="rdv-telephone" name="Téléphone" pattern="^0[1-9][0-9]{8}$" placeholder="Ex : 0650973105" required>
 
       <label for="rdv-message">Motif (facultatif) :</label>
       <textarea id="rdv-message" name="Message" rows="2"></textarea>
 
       <input type="hidden" name="_subject" value="Nouvelle demande de RDV via le site">
-      <input type="hidden" name="_next" value="https://angie89100.github.io/Strategie-et-management/merci.html">
+      <input type="hidden" name="_next" value="https://votresite.fr/merci.html">
       <button type="submit">Demander un RDV</button>
     </form>
   </div>
-
   <p style="text-align:center; color:#777; font-size:0.95em; margin-top:1.5rem">
     ✅ Vos informations sont sécurisées • Les demandes arrivent directement dans votre boîte mail.<br>
     <b>⚡ Pensez à valider l’adresse <u>rhstrama@gmail.com</u> lors du premier envoi (mail de confirmation Formsubmit).</b>
@@ -3068,3 +3064,93 @@ function envoyerSignalement() {
 }
 </style>
 
+<!-- CONTACT + RDV | Formsubmit (mail : rhstrama@gmail.com) -->
+<section id="contact" class="panel">
+  <style>
+    .contact-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2.5rem;
+      justify-content: center;
+      align-items: flex-start;
+      margin: 2rem 0;
+    }
+    .contact-form, .calendar-contact {
+      background: #f8f8fe;
+      border: 1.5px solid #dbc1f9;
+      border-radius: 14px;
+      box-shadow: 0 2px 8px #c6bbef33;
+      padding: 1.5rem 1.1rem;
+      max-width: 350px;
+      width: 100%;
+    }
+    .contact-form h3, .calendar-contact h4 { margin-top: 0; color: #7357bf; }
+    .contact-form label, .calendar-contact label { font-weight: 500; display: block; margin-bottom: 0.3rem;}
+    .contact-form input, .contact-form textarea,
+    .calendar-contact input, .calendar-contact textarea {
+      width: 100%; padding: 0.55rem; margin-bottom: 1rem;
+      border: 1px solid #d2c3f6; border-radius: 8px;
+      font-size: 1rem; background: #fff;
+    }
+    .contact-form button, .calendar-contact button {
+      background: #7357bf; color: #fff; border: none; border-radius: 9px;
+      padding: 0.6rem 1.4rem; font-size: 1.08rem; font-weight: 600; cursor: pointer;
+      box-shadow: 0 1px 7px #c6bbef77;
+      transition: background 0.2s;
+    }
+    .contact-form button:hover, .calendar-contact button:hover { background: #512d8e; }
+    @media (max-width: 900px) {
+      .contact-wrapper { flex-direction: column; align-items: stretch; }
+    }
+  </style>
+
+  <div class="contact-wrapper">
+    <!-- Formulaire de contact -->
+    <form class="contact-form" action="https://formsubmit.co/rhstrama@gmail.com" method="POST">
+      <h3>Formulaire de contact</h3>
+      <label for="nom">Nom :</label>
+      <input type="text" id="nom" name="Nom" required>
+
+      <label for="email">Email :</label>
+      <input type="email" id="email" name="Email" required>
+
+      <label for="telephone">Téléphone :</label>
+      <input type="text" id="telephone" name="Téléphone" pattern="^0[1-9][0-9]{8}$" placeholder="Ex : 0612345678" required>
+
+      <label for="message">Message :</label>
+      <textarea id="message" name="Message" rows="3" required></textarea>
+
+      <!-- Redirection vers page de remerciement -->
+      <input type="hidden" name="_next" value="https://angie89100.github.io/Strategie-et-management/merci.html">
+      <button type="submit">Envoyer</button>
+    </form>
+
+    <!-- Formulaire RDV -->
+    <form class="calendar-contact" action="https://formsubmit.co/rhstrama@gmail.com" method="POST">
+      <h4>Prendre un RDV</h4>
+      <label for="date">Date souhaitée :</label>
+      <input type="date" id="date" name="Date" required>
+
+      <label for="heure">Heure :</label>
+      <input type="time" id="heure" name="Heure" required>
+
+      <label for="rdv-email">Votre Email :</label>
+      <input type="email" id="rdv-email" name="Email" required>
+
+      <label for="rdv-telephone">Téléphone :</label>
+      <input type="text" id="rdv-telephone" name="Téléphone" pattern="^0[1-9][0-9]{8}$" placeholder="Ex : 067891011" required>
+
+      <label for="rdv-message">Motif (facultatif) :</label>
+      <textarea id="rdv-message" name="Message" rows="2"></textarea>
+
+      <input type="hidden" name="_subject" value="Nouvelle demande de RDV via le site">
+      <input type="hidden" name="_next" value="https://angie89100.github.io/Strategie-et-management/merci.html">
+      <button type="submit">Demander un RDV</button>
+    </form>
+  </div>
+
+  <p style="text-align:center; color:#777; font-size:0.95em; margin-top:1.5rem">
+    ✅ Vos informations sont sécurisées • Les demandes arrivent directement dans votre boîte mail.<br>
+    <b>⚡ Pensez à valider l’adresse <u>rhstrama@gmail.com</u> lors du premier envoi (mail de confirmation Formsubmit).</b>
+  </p>
+</section>
