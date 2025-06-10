@@ -1,11 +1,3065 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>Bienvenue</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stratégie & innovation digitale</title>
+  <style>
+    :root {
+      --rose: #fad1e6;
+      --violet: #dcc7f9;
+      --green: #cff4d2;
+      --yellow: #fff9c4;
+      --n900: #1f2937;
+      --n700: #374151;
+      --bloc: #f7f6fb;
+      --bloc-bd: #c8bbf8;
+      --bloc-title: #7357bf;
+    }
+    body {
+      margin: 0;
+      font-family: "Inter", Arial, sans-serif;
+      background: linear-gradient(135deg, var(--rose), var(--violet) 50%, var(--green));
+      background-attachment: fixed;
+      color: var(--n900);
+    }
+    header {
+      background: rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(4px);
+      padding: 2rem 1rem 1rem;
+      text-align: center;
+      position: relative;
+    }
+    h1 { margin: 0 0 0.4rem; font-size: 2rem; }
+    .tagline { font-style: italic; color: var(--n700); margin: 0; }
+
+    .banniere-photos {
+      width: 100%;
+      height: 120px;
+      overflow: hidden;
+      margin-bottom: 2rem;
+      border-radius: 0 0 20px 20px;
+      box-shadow: 0 2px 18px rgba(60,30,120,0.07);
+      display: flex;
+    }
+    .banniere-photos img {
+      width: 33.33%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(8px);
+      padding: 0.75rem 1rem;
+    }
+    .tab-btn {
+      border: none;
+      cursor: pointer;
+      background: var(--green);
+      padding: 0.55rem 1rem;
+      border-radius: 14px;
+      font-weight: 500;
+      transition: background 0.2s;
+    }
+    .tab-btn.active, .tab-btn:hover { background: var(--violet); }
+
+    .panel {
+      display: none;
+      max-width: 1000px;
+      margin: 2rem auto 0 auto;
+      background: rgba(240, 237, 241, 0.94);
+      backdrop-filter: blur(6px);
+      border-radius: 20px;
+      padding: 2rem 1.5rem;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+      position: relative;
+    }
+    .panel.active { display: block; }
+
+    /* Cadre About */
+    .about-box {
+      display: flex;
+      align-items: flex-start;
+      gap: 2rem;
+      background: #f5f4fa;
+      border: 2px solid #dbc1f9;
+      border-radius: 18px;
+      box-shadow: 0 4px 18px rgba(120, 70, 200, 0.09);
+      padding: 2rem 1.5rem;
+      max-width: 620px;
+      min-width: 370px;
+      margin: 0;
+    }
+    .about-box img.profile-photo {
+      flex-shrink: 0;
+      width: 110px; height: 110px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 0;
+    }
+    .about-box-text { text-align: left; }
+
+    .date-box {
+      position: absolute; top: 30px; right: 50px;
+      background: #d6c7d8; color: #22223b;
+      border: 2px solid #dcc7f9; border-radius: 16px;
+      font-size: 1.13rem; font-family: 'Inter', Arial, sans-serif;
+      padding: 0.5rem 1.2rem; box-shadow: 0 2px 14px rgba(180,140,255,0.12);
+      z-index: 50; min-width: 160px; text-align: center;
+    }
+
+    @media (max-width: 700px) {
+      .about-box { flex-direction: column; align-items: center; }
+      .panel { margin-left: 0; }
+      .date-box { right: 8px; top: 12px; font-size: 1rem; padding: 0.35rem 0.5rem;}
+    }
+    .image-row { display: flex; gap: 2rem; justify-content: center; margin: 2rem 0; }
+    .image-row img {
+      width: 200px; height: 120px;
+      object-fit: cover; border-radius: 18px;
+      box-shadow: 0 4px 18px rgba(80,70,120,0.13);
+      border: 2px solid #dbc1f9;
+    }
+    .centered-blocks {
+      width: 100%; display: flex; justify-content: center;
+    }
+    .grid-blocks {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.7rem; margin: 2rem 0; max-width: 950px; width: 100%;
+    }
+    .box-bloc {
+      background: var(--bloc);
+      border: 1.5px solid var(--bloc-bd);
+      border-radius: 14px;
+      box-shadow: 0 2px 14px rgba(170, 125, 255, 0.13);
+      padding: 1.5rem 1.3rem;
+    }
+    .box-bloc h4 {
+      margin-top: 0;
+      font-size: 1.13rem;
+      color: var(--bloc-title);
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    .box-bloc ul { padding-left: 1.1rem; margin-bottom: 0; }
+    .box-bloc li { margin: 0.45rem 0; font-size: 1rem; }
+
+    /* Introduction et conclusion alignés à droite */
+    .intro-section, .conclusion-section {
+      background: none;
+      margin-bottom: 1.3rem;
+      text-align: left;
+    }
+    .intro-section h3, .conclusion-section h3 {
+      margin-bottom: 0.4rem;
+      color: #222;
+      font-weight: 600;
+    }
+
+    /* Liens PDF guides */
+    .pdf-list a {
+      text-decoration: none;
+      color: var(--n900);
+      background: var(--yellow);
+      padding: 0.4rem 0.8rem;
+      border-radius: 10px;
+      display: inline-block;
+      margin: 0.4rem 0;
+    }
+
+    /* Actualités */
+    .actus-feed { background: #fffdf7; border-radius: 10px; padding: 1.5rem 1.2rem; margin: 1.2rem auto; box-shadow: 0 2px 8px #e6defd44; }
+    .actus-feed h4 { color: #5746ba; margin-top: 0; }
+
+    /* Formulaire contact */
+    .contact-form { background: #fcfafd; border: 1px solid #dbc1f9; border-radius: 14px; padding: 1.7rem 1.2rem; max-width: 450px; margin: 2rem auto; box-shadow: 0 2px 12px #ddd6f9; }
+    .contact-form label { font-weight: bold; }
+    .contact-form input, .contact-form textarea, .contact-form select {
+      display: block; width: 100%; padding: 0.45rem 0.6rem; margin-bottom: 1rem; border-radius: 8px; border: 1px solid #dac7f7; font-size: 1rem;
+    }
+    .contact-form button {
+      background: #7357bf; color: #fff; border: none; border-radius: 10px; padding: 0.6rem 1.5rem; font-size: 1.1rem; cursor: pointer;
+      box-shadow: 0 2px 8px #c6bbef88; font-weight: 600; letter-spacing: 0.5px;
+    }
+    .calendar-contact { margin: 2rem auto; background: #fafbfe; border: 1px solid #ece3ff; border-radius: 10px; max-width: 350px; padding: 1.5rem; }
+    .calendar-contact h4 { margin: 0 0 1rem 0; }
+    .calendar-contact input, .calendar-contact select { margin-bottom: 1rem; }
+    .calendar-contact button { background: #2563eb; color: #fff; border-radius: 10px; border: none; padding: 0.6rem 1.2rem; font-weight: bold; }
+    .success-message { color: #0a804e; font-weight: bold; text-align: center; margin-top: 0.8rem; }
+  </style>
 </head>
 <body>
-  <h1>Bienvenue sur mon site GitHub Pages !</h1>
-  <p>Site en ligne avec succès 🎉</p>
+  <header>
+    <div class="banniere-photos">
+      <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=800&q=80" alt="Transformation Digitale">
+      <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80" alt="Ressources Humaines">
+      <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Management du Changement">
+    </div>
+    <h1>Stratégie & innovation digitale</h1>
+    <p class="tagline">« Votre avenir dépend de ce que vous faites aujourd’hui. »</p>
+    <div class="date-box" id="dateBox"></div>
+  </header>
+  <div class="tabs">
+    <button class="tab-btn active" data-target="about">À propos</button>
+    <button class="tab-btn" data-target="veille">Veille digitale</button>
+    <button class="tab-btn" data-target="support">Support numérique</button>
+    <button class="tab-btn" data-target="acquisition">Acquisition web</button>
+    <button class="tab-btn" data-target="solution">Solution digitale</button>
+    <button class="tab-btn" data-target="marketing">Stratégie marketing</button>
+    <button class="tab-btn" data-target="gestion-de-projet-numerique">Gestion de projet numérique</button>
+    <button class="tab-btn" data-target="procedures">Tutoriels & Procédures</button>
+    <button class="tab-btn" data-target="ads">Google Ads</button>
+    <button class="tab-btn" data-target="guides">Guides PDF et Formulaire</button>
+    <button class="tab-btn" data-target="quiz">Quiz</button>
+    <button class="tab-btn" data-target="etude-cas">Etude de cas</button>
+    <button class="tab-btn" data-target="actus">Actualités</button>
+    <button class="tab-btn" data-target="sante-mentale-fpt">Santé mentale FPT</button>
+    <button class="tab-btn" data-target="design">Porfolio desing</button>
+    <button class="tab-btn" data-target="contact">Contact</button>
+    
+  </div>
+
+  <!-- A PROPOS -->
+  <section id="about" class="panel active">
+    <div class="about-box">
+      <img src="AB SITE WEB.png" alt="Photo de Angélique BOULLE" class="profile-photo">
+      <div class="about-box-text">
+        <h4>À propos de moi</h4>
+        <p>Depuis toujours fascinée par la relation humaine et la technologie, j’ai choisi de conjuguer ces deux passions en me spécialisant dans la communication digitale et le management.</p>
+        <p><em><strong>« Créer son avenir, c’est oser franchir le pas chaque jour. »</em></p></strong>
+        <p>Ce mantra m’accompagne dans chaque projet, chaque défi, chaque collaboration.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ONGLET TYPE : exemple veille digitale -->
+  <section id="veille" class="panel">
+    <h2 style="text-align:center;">Conception d’une démarche de veille sur les innovations digitales</h2>
+    <div class="intro-section">
+      
+      <p>Dans un écosystème numérique en constante mutation, la veille sur les innovations digitales s’impose comme un levier stratégique incontournable. <strong>L’enjeu :</strong> rester à l’affût des dernières avancées technologiques – intelligence artificielle, cybersécurité, outils collaboratifs, et bien d’autres – afin d’identifier celles qui sont pertinentes pour l’organisation, tout en anticipant les opportunités et les risques qu’elles peuvent générer.</p>
+    </div>
+<div class="image-row">
+  <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Collaboration digitale">
+  <img src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=400&q=80" alt="Gestion de projet numérique">
+</div>
+    </div>
+    <div class="centered-blocks">
+      <div class="grid-blocks">
+        <div class="box-bloc"><h4>Objectifs</h4><ul><li>Identifier en continu les tendances technologiques et innovations digitales pertinentes pour l’organisation.</li><li>Anticiper les opportunités et menaces liées à l’émergence de nouvelles solutions digitales.<li>Faciliter la diffusion et l’appropriation des connaissances technologiques au sein des équipes.</div>
+        <div class="box-bloc"><h4>Analyse</h4><ul><li>Évaluer les besoins de l’organisation en matière de veille (domaines, priorités).</li><li>Cartographier les sources d’information fiables et spécialisées (blogs, sites, réseaux pro, études...).<li>Identifier les parties prenantes internes impliquées dans la veille (RH, DSI, métiers, management).</div>
+        <div class="box-bloc"><h4>Messages clés</h4><ul><li>Rester informé, c’est rester compétitif.</li><li>La veille est un investissement stratégique, pas une charge.</li><li>L’innovation commence par la connaissance et le partage d’informations.</li></div>
+        <div class="box-bloc"><h4>Canaux de communication</h4><ul><li>Outils collaboratifs internes (Intranet, Teams, Slack...)</li>
+    <li>Newsletters de veille envoyées régulièrement aux équipes</li>
+    <li>Workshops/ateliers pour partager les tendances et faire émerger des idées</li></ul></div>
+        <div class="box-bloc"><h4>Planification et budget</h4><ul><li>Définir une fréquence de veille et un calendrier éditorial pour la diffusion des résultats.</li>
+    <li>Prévoir des temps de formation à la méthodologie de veille.</li>
+    <li>Budgéter abonnements, temps de travail dédié et événements ponctuels (ateliers, conférences).</li></ul></div>
+        <div class="box-bloc"><h4>Mesures de succès</h4><ul><li>Nombre d’innovations détectées et exploitées par an.</li>
+    <li>Taux d’engagement des équipes (participation, lectures, retours).</li>
+    <li>Impacts concrets sur la transformation digitale (solutions déployées, processus optimisés).</li></ul></div>
+      </div>
+    </div>
+    <div class="conclusion-section">
+     
+      <p>Mettre en place une démarche de veille structurée permet à l’organisation de transformer l’information en véritables leviers de performance : gain de productivité, réduction des risques et capacité d’innovation accrue. Cette approche favorise l’émergence d’une culture commune fondée sur l’anticipation et le partage des connaissances.</p>
+    </div>
+  </section>
+
+<!-- SUPPORT NUMERIQUE -->
+<section id="support" class="panel">
+  <h2 style="text-align:center;">Conception d’un support numérique innovant</h2>
+  <div class="intro-section">
+    <p>
+      Un support numérique innovant a pour objectif d’offrir aux utilisateurs, qu’ils soient internes ou externes, une expérience interactive, engageante et accessible à tout moment. Qu’il s’agisse d’un guide d’intégration, d’une formation en ligne ou d’un centre de ressources, ce type de support doit être conçu pour répondre précisément aux besoins, faciliter la compréhension et encourager le développement des compétences.
+    </p>
+<div class="image-row">
+  <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=400&q=80" alt="Collaboration numérique">
+  <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80" alt="Tablette support digital">
+</div>
+  <div class="centered-blocks">
+    <div class="grid-blocks">
+      <div class="box-bloc">
+        <h4>Objectifs</h4>
+        <ul>
+          <li>Offrir une expérience utilisateur interactive et engageante, favorisant l’autonomie dans l’apprentissage.</li>
+          <li>Accélérer la montée en compétences tout en réduisant le temps de formation traditionnel.</li>
+          <li>Renforcer la cohérence et la qualité des processus internes grâce à une transmission efficace du savoir.</li>
+        </ul>
+      </div>
+      <div class="box-bloc">
+        <h4>Analyse</h4>
+        <ul>
+          <li><strong>Identifier les besoins des utilisateurs (internes/externes)</strong> : attentes, difficultés, préférences d’apprentissage.</li>
+          <li>Évaluer les outils et technologies numériques disponibles (plateformes, interactivité, accessibilité…).</li>
+          <li><strong>Prendre en compte les contraintes organisationnelles</strong> : budget, compétences internes, temps disponible pour la conception.</li>
+        </ul>
+      </div>
+      <div class="box-bloc">
+        <h4>Messages clés</h4>
+        <ul>
+          <li>L’innovation digitale rend l’apprentissage plus efficace et accessible à tous.</li>
+          <li>Un support numérique bien conçu réduit les erreurs et renforce l’autonomie.</li>
+          <li>Investir dans la digitalisation des supports, c’est investir dans la performance collective.</li>
+        </ul>
+      </div>
+      <div class="box-bloc">
+        <h4>Canaux de communication</h4>
+        <ul>
+          <li>Plateformes de formation en ligne (LMS, e-learning, microlearning).</li>
+          <li>Réseaux internes (Intranet, newsletters, groupes collaboratifs).</li>
+          <li>Webinaires et tutoriels vidéo partagés lors de réunions ou sur les réseaux sociaux professionnels.</li>
+        </ul>
+      </div>
+      <div class="box-bloc">
+        <h4>Planification et budget</h4>
+        <ul>
+          <li>Définir les étapes clés (analyse des besoins, conception, tests, déploiement, feedbacks).</li>
+          <li>Élaborer un calendrier de production et de mise en ligne, avec phases de test utilisateur.</li>
+          <li>Prévoir un budget pour les outils, la création de contenus multimédias et le temps dédié à la conception.</li>
+        </ul>
+      </div>
+      <div class="box-bloc">
+        <h4>Mesures de succès</h4>
+        <ul>
+          <li>Taux d’utilisation du support numérique par les utilisateurs cibles.</li>
+          <li>Diminution du temps de formation et du nombre d’erreurs post-déploiement.</li>
+          <li>Niveau de satisfaction et de progression mesuré via des questionnaires ou des feedbacks utilisateurs.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="conclusion-section">
+    <p>
+      Un support numérique innovant permet d’apprendre plus vite et plus efficacement, tout en rendant l’expérience plus agréable. L’intégration de contenus multimédias, d’interactivité et de feedback en temps réel booste l’engagement des utilisateurs, accélère la montée en compétences et réduit significativement les coûts et le temps associés aux formations classiques.
+    </p>
+  </div>
+</section>
+
+
+<!-- ACQUISITION WEB -->
+<section id="acquisition" class="panel">
+  <h2 style="text-align:center;">Conception et déploiement d’une campagne d’acquisition sur le Web</h2>
+  <div class="intro-section">
+    <p>À l’ère du digital, la présence en ligne est un levier essentiel de croissance pour toute entreprise. Concevoir et piloter une campagne d’acquisition web performante permet non seulement d’attirer de nouveaux clients, mais aussi de renforcer la notoriété de la marque et de dynamiser les ventes grâce à des stratégies numériques ciblées et efficaces.</p>
+  </div>
+<div class="image-row">
+  <img src="https://images.unsplash.com/photo-1503676382389-4809596d5290?auto=format&fit=crop&w=400&q=80" alt="Analyse acquisition web">
+  <img src="https://images.unsplash.com/photo-1517292987719-0369a794ec0f?auto=format&fit=crop&w=400&q=80" alt="Stratégie acquisition marketing digital">
+</div>
+
+  <div class="centered-blocks">
+    <div class="grid-blocks">
+      <div class="box-bloc">
+        <h4>Objectifs</h4>
+        <ul>
+          <li>Attirer de nouveaux clients grâce à une présence digitale optimisée.</li>
+          <li>Augmenter la notoriété de la marque et générer des leads qualifiés.</li>
+          <li>Maximiser le retour sur investissement (ROI) par une gestion efficace des canaux d’acquisition.</li>
+        </ul>
+      </div>
+      <div class="box-bloc">
+        <h4>Analyse</h4>
+        <ul>
+          <li>Étudier le marché cible, le comportement des utilisateurs et les canaux de communication les plus efficaces.</li>
+          <li>Analyser la concurrence et identifier les leviers d’acquisition utilisés par les acteurs du secteur.</li>
+          <li>Évaluer les ressources internes et externes disponibles pour la mise en œuvre de la campagne (budget, outils, équipes).</li>
+        </ul>
+      </div>
+      <div class="box-bloc">
+        <h4>Messages Clés</h4>
+        <ul>
+          <li>Votre marque au bon endroit, au bon moment.</li>
+          <li>Une stratégie web efficace, c’est plus de visibilité, plus de clients.</li>
+          <li>Transformez chaque clic en opportunité de croissance.</li>
+        </ul>
+      </div>
+      <div class="box-bloc">
+        <h4>Canaux de Communication</h4>
+        <ul>
+          <li>Réseaux sociaux (Facebook, LinkedIn, Instagram, X/Twitter, TikTok…)</li>
+          <li>Google Ads (Search, Display, Shopping…)</li>
+          <li>Email marketing, affiliation, partenariats et retargeting</li>
+        </ul>
+      </div>
+      <div class="box-bloc">
+        <h4>Planification et Budget</h4>
+        <ul>
+          <li>Élaborer un calendrier de diffusion et de pilotage (lancement, monitoring, ajustements).</li>
+          <li>Prévoir des phases de test (A/B testing) et d’optimisation continue.</li>
+          <li>Allouer le budget par canal, prévoir les coûts de création de contenus et les outils d’analyse.</li>
+        </ul>
+      </div>
+      <div class="box-bloc">
+        <h4>Mesures de Succès</h4>
+        <ul>
+          <li>Nombre de leads générés et coût d’acquisition par canal.</li>
+          <li>Taux de conversion des campagnes et retour sur investissement (ROI).</li>
+          <li>Évolution de la notoriété de la marque (impressions, trafic, engagement sur les réseaux).</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="conclusion-section">
+    <p>Une campagne d’acquisition web bien orchestrée, c’est la promesse de booster la visibilité de votre marque et d’attirer une nouvelle clientèle qualifiée. Grâce à une analyse précise, une stratégie de contenu sur-mesure et un déploiement optimal sur les bons canaux digitaux, vous transformez chaque interaction en opportunité et faites passer votre entreprise à la vitesse supérieure.</p>
+  </div>
+</section>
+
+
+<!-- SOLUTION DIGITALE -->
+<section id="solution" class="panel">
+  <h2 style="text-align:center;">Réalisation, mise en oeuvre et pilotage d’une solution digitale</h2>
+  <div class="intro-section">
+    <p><strong>La réalisation et le pilotage d’une solution digitale transforment un besoin métier en un outil numérique concret et performant</strong> : intranet, application mobile ou service en ligne. Chaque projet repose sur une compréhension fine des attentes utilisateurs, une conception centrée sur l’expérience et un suivi continu pour garantir des résultats durables. À titre d’exemple, en 2023, <strong>70 %</strong>des projets digitaux en France ont nécessité des ajustements après leur lancement : un pilotage rigoureux s’impose donc pour maximiser la réussite et l’efficacité de chaque solution.</p>
+  </div>
+<div class="image-row">
+  <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=400&q=80" alt="Développement et gestion digitale">
+  <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80" alt="Pilotage projet digital">
+</div>
+  <div class="centered-blocks">
+    <div class="grid-blocks">
+      <div class="box-bloc">
+        <h4>Objectifs</h4>
+        <ul>
+          <li>Transformer un besoin métier en un outil numérique performant et adapté.</li>
+          <li>Optimiser les processus internes pour améliorer la productivité et la collaboration.</li>
+          <li>Assurer une adoption rapide et durable de la solution digitale par les utilisateurs.</li>
+        </ul>
+      </div>
+      <div class="box-bloc">
+        <h4>Analyse</h4>
+        <ul>
+          <li>Identifier précisément les besoins métiers et les attentes des utilisateurs finaux.</li>
+          <li><strong>Évaluer l’existant</strong> : outils, processus, infrastructures et compétences déjà en place.</li>
+          <li>Analyser les risques (techniques, organisationnels, humains) et les opportunités liées au déploiement.</li>
+        </ul>
+      </div>
+      <div class="box-bloc">
+        <h4>Messages clés</h4>
+        <ul>
+          <li>Une solution digitale sur-mesure pour répondre à vos enjeux.</li>
+          <li>L’utilisateur au cœur de la démarche pour garantir l’adoption.</li>
+          <li>Un pilotage agile pour des résultats concrets et mesurables.</li>
+        </ul>
+      </div>
+      <div class="box-bloc">
+        <h4>Canaux de communication</h4>
+        <ul>
+          <li>Réunions de lancement et points d’avancement réguliers avec les parties prenantes.</li>
+          <li><strong>Supports internes</strong> : intranet, newsletters, guides d’utilisation, tutoriels vidéo.</li>
+          <li>Sessions de formation, ateliers pratiques et webinaires pour accompagner le changement.</li>
+        </ul>
+      </div>
+      <div class="box-bloc">
+        <h4>Planification et budget</h4>
+        <ul>
+          <li><strong>Définir les étapes clés</strong> : cadrage, conception, développement, tests, déploiement, accompagnement et suivi.</li>
+          <li>Mettre en place un planning détaillé avec des jalons et des points de contrôle réguliers.</li>
+          <li>Intégrer les coûts de développement, de licences logicielles, de formation et d’assistance post-lancement.</li>
+        </ul>
+      </div>
+      <div class="box-bloc">
+        <h4>Mesures de succès</h4>
+        <ul>
+          <li>Taux d’adoption et de satisfaction des utilisateurs.</li>
+          <li><strong>Amélioration des indicateurs clés</strong> : productivité, réduction des erreurs, temps de traitement.</li>
+          <li>Respect du planning et du budget initial, ajustements réalisés avec réactivité.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="conclusion-section">
+    <p>Le succès d’une solution digitale dépend d’une compréhension précise des besoins, d’une conception centrée sur l’utilisateur et d’un pilotage attentif après le lancement. En combinant expérience utilisateur (UX), méthodes agiles et suivi en continu, l’organisation transforme ses processus métiers, optimise la productivité et favorise une adoption rapide et pérenne des nouveaux outils.</p>
+  </div>
+</section>
+
+
+<!-- STRATEGIE MARKETING -->
+<section id="marketing" class="panel">
+  <h2 style="text-align:center;">Stratégie marketing</h2>
+  <div class="intro-section">
+    <p>Dans un environnement concurrentiel en constante évolution, une campagne marketing soigneusement planifiée est essentielle pour renforcer la notoriété, générer des leads qualifiés et dynamiser les ventes. Ce document stratégique propose une méthodologie complète pour concevoir une campagne marketing cohérente, du ciblage des audiences jusqu’à l’analyse des résultats, illustrée par des exemples chiffrés à chaque étape.</p>
+  </div>
+<div class="image-row">
+  <img src="https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?auto=format&fit=crop&w=400&q=80" alt="Brainstorming stratégie marketing">
+  <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=400&q=80" alt="Analyse stratégie digitale">
+</div>
+  <div class="centered-blocks">
+    <div class="grid-blocks">
+      <div class="box-bloc">
+        <h4>Objectifs</h4>
+        <ul>
+          <li>Accroître la notoriété de la marque sur les marchés cibles.</li>
+          <li>Générer des leads qualifiés et stimuler la conversion des prospects en clients.</li>
+          <li>Fidéliser la clientèle existante et augmenter la valeur vie client (CLV).</li>
+        </ul>
+      </div>
+      <div class="box-bloc">
+        <h4>Analyse</h4>
+        <ul>
+          <li>Étudier les attentes, besoins et comportements des clients potentiels et existants.</li>
+          <li>Analyser la concurrence, les tendances du marché et les points de différenciation.</li>
+          <li><strong>Évaluer les ressources internes</strong> : budget, équipe, outils de communication, positionnement actuel.</li>
+        </ul>
+      </div>
+      <div class="box-bloc">
+        <h4>Messages clés</h4>
+        <ul>
+          <li>Votre solution répond concrètement aux besoins du client.</li>
+          <li><strong>La valeur ajoutée de la marque</strong> : innovation, confiance et proximité.</li>
+          <li>L’engagement envers la satisfaction et la réussite du client.</li>
+        </ul>
+      </div>
+      <div class="box-bloc">
+        <h4>Canaux de communication</h4>
+        <ul>
+          <li>Réseaux sociaux (LinkedIn, Facebook, Instagram, TikTok, X/Twitter…)</li>
+          <li>Site internet, blog, contenus SEO et newsletters</li>
+          <li><strong>Campagnes multicanales</strong> : e-mailing, événements, publicités en ligne et influenceurs</li>
+        </ul>
+      </div>
+      <div class="box-bloc">
+        <h4>Planification et budget</h4>
+        <ul>
+          <li><strong>Définir les grandes étapes</strong> : analyse, création de contenu, diffusion, suivi et ajustements.</li>
+          <li>Mettre en place un calendrier éditorial et des campagnes saisonnières.</li>
+          <li>Répartir les investissements par canal, et prévoir une enveloppe pour tester de nouveaux outils ou approches.</li>
+        </ul>
+      </div>
+      <div class="box-bloc">
+        <h4>Mesures de succès</h4>
+        <ul>
+          <li>Évolution de la notoriété de la marque (portée, mentions, partages, trafic web).</li>
+          <li>Nombre de leads générés, taux de conversion, coût d’acquisition client (CAC).</li>
+          <li>Taux de fidélisation, satisfaction client et valeur vie client (CLV).</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="conclusion-section">
+    <p>Une campagne marketing stratégique, appuyée par une gestion budgétaire précise, peut décupler la visibilité d’une marque et stimuler ses ventes. En exploitant la synergie des réseaux sociaux, de Google Ads, du contenu vidéo et du SEO, et en assurant un suivi rigoureux des indicateurs clés de performance, chaque action devient mesurable et le retour sur investissement est maximisé.</p>
+  </div>
+</section>
+
+<!-- GESTION DE PROJET NUMERIQUE-->
+<section id="gestion-de-projet-numerique" class="panel">
+  <h2 style="text-align:center;">Gestion de projet numérique</h2>
+  <div class="intro-section">
+    <p>Dans un contexte où la transformation digitale impose agilité et efficacité, la gestion de projet numérique s’impose comme une compétence stratégique pour piloter l’innovation et assurer le succès des initiatives digitales. Il s’agit de structurer, planifier et coordonner l’ensemble des ressources (humaines, technologiques, financières) pour atteindre les objectifs fixés, tout en s’appuyant sur des outils collaboratifs et des méthodes agiles.</p>
+  </div>
+<div class="image-row">
+  <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Gestion de projet, planification, organisation">
+ <<img src="istockphoto-1411195926-612x612.jpg" alt="Interface projet numérique VSCode">
+</div>
+  <div class="centered-blocks">
+    <div class="grid-blocks">
+      <div class="box-bloc">
+        <h4>Objectifs</h4>
+        <ul>
+          <li>Structurer et piloter les projets digitaux de manière efficace (délais, budget, qualité).</li>
+          <li>Favoriser la collaboration transversale entre équipes (métiers, IT, RH, partenaires externes).</li>
+          <li>Intégrer l’innovation continue au cœur des projets (tests, retours utilisateurs, itérations).</li>
+          <li>Anticiper et maîtriser les risques (techniques, organisationnels, humains).</li>
+        </ul>
+      </div>
+      <div class="box-bloc">
+        <h4>Analyse</h4>
+        <ul>
+          <li><strong>État des lieux :</strong> identifier les projets à lancer/prioriser selon la stratégie globale.</li>
+          <li><strong>Ressources :</strong> recenser les compétences, outils et partenaires nécessaires.</li>
+          <li><strong>Processus :</strong> choisir une méthodologie adaptée (Agile/Scrum, Cycle en V, Kanban…).</li>
+          <li><strong>Cartographie des parties prenantes :</strong> déterminer les rôles de chaque acteur (chefs de projet, sponsors, utilisateurs, prestataires…).</li>
+          <li><strong>Points de vigilance :</strong>gestion des résistances au changement, arbitrage des priorités, communication interne/externe.</li>
+        </ul>
+      </div>
+      <div class="box-bloc">
+        <h4>Messages clés</h4>
+        <ul>
+          <li>La gestion de projet digital, c’est transformer une idée en réalité concrète.</li>
+          <li>Une collaboration efficace réduit les risques d’échec et accélère la livraison de valeur.</li>
+          <li>L’innovation vient des échanges et de l’implication de tous les acteurs.</li>
+        </ul>
+      </div>
+      <div class="box-bloc">
+        <h4>Canaux de communication</h4>
+        <ul>
+          <li><strong>Outils collaboratifs : </strong>Teams, Trello, Asana, Slack pour centraliser l’information et suivre l’avancement.</li>
+          <li><strong>Réunions de pilotage :</strong>points hebdomadaires, comités de suivi, rétrospectives.</li>
+          <li><strong>Tableaux de bord partagés : </strong>indicateurs de suivi (KPI, burndown chart, planning).</li>
+          <li><strong>Documents partagés :</strong>cloud, wikis, guides méthodologiques, comptes rendus accessibles à tous.</li>
+        </ul>
+      </div>
+      <div class="box-bloc">
+        <h4>Planification et budget</h4>
+        <ul>
+          <li><strong>Roadmap : </strong>définir les grandes étapes (lancements, jalons, livrables).</li>
+          <li><strong>Calendrier :</strong>estimer les délais par phase et adapter selon l’avancement.</li>
+          <li><strong>Budget </strong>chiffrer les besoins logiciels, matériels, temps/homme, formation éventuelle.</li>
+          <li><strong>Marge d’adaptation :</strong>prévoir des ressources pour gérer l’imprévu (crises, demandes nouvelles).</li>
+        </ul>
+      </div>
+      <div class="box-bloc">
+        <h4>Mesures de succès</h4>
+        <ul>
+          <li>Respect des délais, budgets, qualité des livrables.</li>
+          <li>Taux de satisfaction des utilisateurs/clients internes.</li>
+          <li>Taux d’adoption des outils ou solutions déployés.</li>
+          <li>Nombre d’améliorations ou innovations issues du projet.</li>
+          <li>Engagement des parties prenantes (participation aux ateliers, feedback recueilli).</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="conclusion-section">
+    <p>La gestion de projet numérique, portée par une collaboration digitale efficace, permet d’aligner les équipes, de sécuriser les livrables et de maximiser l’impact des projets sur la transformation de l’organisation. Elle favorise une dynamique d’innovation, tout en maîtrisant les risques et les ressources mobilisées.
+Mettre en place une gouvernance projet rigoureuse et participative est un facteur clé pour réussir ses ambitions digitales.</p>
+  </div>
+</section>
+
+
+<!-- PROCEDURES -->
+<section id="procedures" class="panel">
+  <h2 style="text-align:center;">Tutoriels & procédures</h2>
+  <div class="intro-section">
+    <p>Pour favoriser l’adoption rapide de nouvelles procédures internes, la création de tutoriels numériques s’impose comme une solution performante. Contrairement aux supports statiques (PDF, mémos), les tutoriels interactifs accompagnent les utilisateurs étape par étape, réduisent les erreurs et boostent la productivité. À titre d’exemple, une étude interne révèle qu’un tutoriel vidéo peut diminuer de <strong>40 %</strong> les demandes d’assistance sur une même procédure.</p>
+  </div>
+<div class="image-row">
+  <img src="https://images.unsplash.com/photo-1461344577544-4e5dc9487184?auto=format&fit=crop&w=400&q=80" alt="Formation digitale étape par étape">
+  <img src="https://images.unsplash.com/photo-1513258496099-48168024aec0?auto=format&fit=crop&w=400&q=80" alt="Apprentissage collaboratif numérique">
+</div>
+  <div class="centered-blocks">
+    <div class="grid-blocks">
+      <div class="box-bloc">
+        <h4>Objectifs</h4>
+        <ul>
+          <li>Standardiser les processus internes pour garantir la qualité et la cohérence des pratiques.</li>
+          <li>Faciliter la prise en main des outils et procédures par les utilisateurs, nouveaux comme expérimentés.</li>
+          <li>Réduire les demandes d’assistance en favorisant l’autonomie et l’apprentissage continu.</li>
+        </ul>
+      </div>
+      <div class="box-bloc">
+        <h4>Analyse</h4>
+        <ul>
+          <li>Identifier les procédures ou outils nécessitant un accompagnement pédagogique (retours utilisateurs, points de blocage fréquents).</li>
+          <li><strong>les profils des utilisateurs</strong> : niveau de maîtrise, besoins spécifiques, freins à l’adoption.</li>
+          <li>Évaluer les supports existants et les formats les plus adaptés (vidéos, guides interactifs, infographies…).</li>
+        </ul>
+      </div>
+      <div class="box-bloc">
+        <h4>Messages clés</h4>
+        <ul>
+          <li>Des procédures claires pour des équipes plus efficaces.</li>
+          <li>Un accompagnement digital pour gagner en autonomie et sérénité.</li>
+          <li>L’accès à la bonne information, au bon moment, pour éviter les erreurs.</li>
+        </ul>
+      </div>
+      <div class="box-bloc">
+        <h4>Canaux de communication</h4>
+        <ul>
+          <li>Plateformes internes (intranet, portail RH, centre de ressources).</li>
+          <li>E-mails d’information ou newsletters dédiées à la formation.</li>
+          <li>Sessions de présentation et tutoriels vidéo intégrés dans les parcours d’intégration ou de montée en compétences.</li>
+        </ul>
+      </div>
+      <div class="box-bloc">
+        <h4>Planification et budget</h4>
+        <ul>
+          <li>Prioriser les procédures à documenter selon l’urgence et la fréquence d’utilisation.</li>
+          <li>Établir un planning de création, validation, diffusion et mise à jour des tutoriels.</li>
+          <li>Prévoir un budget pour la production de contenus multimédias et la maintenance régulière.</li>
+        </ul>
+      </div>
+      <div class="box-bloc">
+        <h4>Mesures de succès</h4>
+        <ul>
+          <li>Diminution du nombre de sollicitations au support ou à la hotline.</li>
+          <li>Taux d’utilisation et de complétion des tutoriels/procédures par les utilisateurs.</li>
+          <li>Satisfaction des utilisateurs mesurée par des questionnaires ou feedbacks.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="conclusion-section">
+    <p>L’implémentation de tutoriels numériques s’inscrit pleinement dans la transformation digitale de l’organisation. En digitalisant les procédures internes, on fluidifie la transmission du savoir, on limite les erreurs et on améliore la productivité. Miser sur des contenus interactifs et sur le suivi des usages, c’est accélérer la modernisation, renforcer l’agilité et assurer une cohérence durable dans l’ensemble des process.</p>
+  </div>
+</section>
+
+
+<!-- GOOGLE ADS -->
+<section id="ads" class="panel">
+  <h2 style="text-align:center;">Google Ads : Stratégies multicanal</h2>
+  <div class="intro-section">
+    <p>L’implémentation de tutoriels numériques s’inscrit pleinement dans la transformation digitale de l’organisation. En digitalisant les procédures internes, on fluidifie la transmission du savoir, on limite les erreurs et on améliore la productivité. Miser sur des contenus interactifs et sur le suivi des usages, c’est accélérer la modernisation, renforcer l’agilité et assurer une cohérence durable dans l’ensemble des process.</p>
+  </div>
+<div class="image-row">
+  <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80" alt="Stratégie Google Ads multicanal">
+ <img src="https://images.unsplash.com/photo-1503676382389-4809596d5290?auto=format&fit=crop&w=400&q=80" alt="Analyse campagnes multicanal Google Ads">
+</div>
+  <div class="centered-blocks">
+    <div class="grid-blocks">
+      <div class="box-bloc">
+        <h4>Objectifs</h4>
+        <ul>
+          <li>Maximiser la visibilité de la marque sur l’ensemble du parcours d’achat digital.</li>
+          <li>Attirer un trafic qualifié et générer des conversions sur plusieurs canaux (Search, Display, Vidéo, Shopping, Apps).</li>
+          <li>Optimiser le retour sur investissement publicitaire grâce à une gestion intelligente des campagnes et des budgets.</li>
+        </ul>
+      </div>
+      <div class="box-bloc">
+        <h4>Analyse</h4>
+        <ul>
+          <li>Identifier les segments d’audience et leurs comportements sur les différents canaux Google Ads.</li>
+          <li><strong>la performance historique des campagnes :</strong> mots-clés, emplacements, formats et coûts.</li>
+          <li>Étudier la complémentarité des leviers (Search, Display, Vidéo, Shopping, Apps) pour une couverture optimale du parcours client.</li>
+        </ul>
+      </div>
+      <div class="box-bloc">
+        <h4>Messages Clés</h4>
+        <ul>
+          <li>Touchez vos clients partout où ils naviguent et consomment du contenu.</li>
+          <li>Des campagnes coordonnées pour transformer l’audience en résultats concrets.</li>
+          <li>L’analyse continue et l’optimisation garantissent un budget investi intelligemment.</li>
+        </ul>
+      </div>
+      <div class="box-bloc">
+        <h4>Canaux de Communication</h4>
+        <ul>
+          <li>Réseau de recherche Google (Search).</li>
+          <li>Réseau Display (bannières, sites partenaires, Gmail, etc.).</li>
+          <li>YouTube pour la vidéo, Google Shopping pour les produits, Campagnes Apps pour le mobile.</li>
+        </ul>
+      </div>
+      <div class="box-bloc">
+        <h4>Planification et Budget</h4>
+        <ul>
+          <li>Définir les objectifs de chaque canal, répartir les budgets, planifier les lancements simultanés ou séquentiels.</li>
+          <li>Mettre en place des tests A/B sur les annonces, audiences et enchères.</li>
+          <li>Allouer une part du budget à l’expérimentation et à l’optimisation continue.</li>
+        </ul>
+      </div>
+      <div class="box-bloc">
+        <h4>Mesures de Succès</h4>
+        <ul>
+          <li>Évolution du nombre de conversions par canal et coût par conversion.</li>
+          <li>Taux de clic (CTR), taux de conversion et retour sur investissement (ROAS).</li>
+          <li>Répartition et progression du trafic qualifié issu des différents leviers (Search, Display, Vidéo, Shopping, Apps).</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="conclusion-section">
+    <p>Google Ads s’impose comme un levier incontournable de la transformation digitale, permettant de toucher des prospects à chaque étape du parcours d’achat. En orchestrant intelligemment Search, Display, Vidéo, App Campaigns et Shopping, et en affinant en continu les ciblages et les enchères, l’organisation bénéficie d’un retour sur investissement mesurable, d’un trafic qualifié en hausse et d’une croissance tangible des conversions.</p>
+  </div>
+</section>
+
+
+  <!-- GUIDES PDF : boutons de téléchargement uniquement (pas de zone upload) -->
+<section id="guides" class="panel">
+  <h2>Guides PDF & Magazine CV</h2>
+  <div class="pdf-list">
+    <p><strong>Téléchargez les guides PDF et formulaire de santé de signalement santé au travail :</strong></p>
+<a href="Magazine CV ABOULLE.pdf" target="_blank">Télécharger le Magazine CV ABOULLE</a>
+<a href="Guide Pratique Atelier transformation digitale, RH et management du changement.pdf" target="_blank">Télécharger le guide Pratique Atelier transformation digitale, RH et management du changement</a>
+<a href="Guide Pratique les sept cles.pdf" target="_blank">Télécharger le guide Pratique les sept cles</a>
+<a href="Formulaire de signalement Santé au travail.pdf" target="_blank">Télécharger le Formulaire de signalement Santé au travail</a>
+<a href="Projet Agents volants.pdf" target="_blank">Télécharger le projet Agents volants pour la collectivité térritoriale</a>
+      </div>
+</section>
+
+<script>
+function downloadFile(link) {
+  // Crée un lien de téléchargement invisible
+  var a = document.createElement('a');
+  a.href = link.href;
+  a.download = link.getAttribute('download') || '';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  return false; // Empêche l’ouverture normale du lien
+}
+</script>
+
+</section>
+
+
+
+  <!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Quiz Stratégie Digitale</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f5f7fb;
+      margin: 0;
+      padding: 0;
+    }
+    #quiz.panel {
+      max-width: 820px;
+      margin: 40px auto 60px auto;
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 2px 18px #e3e3fa;
+      padding: 28px 32px 32px 32px;
+    }
+    #quiz h2 {
+      text-align: center;
+      color: #5e48c8;
+      margin-bottom: 18px;
+    }
+    #quiz .quiz-question {
+      background: #f8f8ff;
+      border-radius: 12px;
+      box-shadow: 0 1px 8px #e7e6fc;
+      padding: 14px 16px;
+      margin: 18px 0 15px 0;
+    }
+    #quiz .quiz-question ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    #quiz .quiz-question li {
+      margin-bottom: 7px;
+    }
+    #quiz .quiz-feedback {
+      margin-top: 6px;
+      font-size: 0.97em;
+    }
+    #quiz .quiz-result {
+      font-size: 1.2em;
+      font-weight: bold;
+      margin: 20px 0 10px 0;
+      color: #1a8754;
+      text-align:center;
+    }
+    #quiz .quiz-submit-btn, #quiz .quiz-download-btn {
+      margin: 18px 8px 0 0;
+      background: #7a5ef8;
+      color: #fff;
+      border: none;
+      border-radius: 7px;
+      padding: 10px 22px;
+      cursor: pointer;
+      font-size: 1em;
+      box-shadow: 0 2px 8px #e0e0fa;
+      transition: background 0.2s;
+      display: inline-block;
+    }
+    #quiz .quiz-submit-btn:hover, #quiz .quiz-download-btn:hover {
+      background: #5837e7;
+    }
+    #quiz select {
+      margin: 12px 0 22px 0;
+      font-size: 1em;
+      padding: 4px 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      background: #f5f5fd;
+    }
+    @media (max-width: 700px) {
+      #quiz.panel {
+        padding: 12px 4vw 24px 4vw;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- QUIZ -->
+<section id="quiz" class="panel">
+  <h2>Quiz : Testez vos connaissances</h2>
+  <p><strong>Choisissez un sujet :</strong></p>
+  <select id="quizSelect">
+    <option value="">Sélectionner...</option>
+    <option value="veille">Veille digitale</option>
+    <option value="support">Support numérique</option>
+    <option value="acquisition">Acquisition web</option>
+    <option value="solution">Solution digitale</option>
+    <option value="marketing">Stratégie marketing</option>
+    <option value="procedures">Tutoriels & procédures</option>
+    <option value="ads">Google Ads</option>
+  </select>
+  <div id="quizContainer"></div>
+</section>
+
+<!-- jsPDF pour PDF export -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+
+/* ==== DATA DU QUIZ ==== */
+const quizData = {
+// ------------------ VEILLE DIGITALE ------------------
+veille: [
+  {
+    question: "Quel est le principal objectif d’une démarche de veille digitale ?",
+    choices: [
+      "Réduire les coûts informatiques",
+      "Identifier les innovations et anticiper les tendances",
+      "Créer des vidéos pour les réseaux sociaux",
+      "Former tous les employés à l’IA"
+    ],
+    correct: 1,
+    explanations: [
+      "Réduire les coûts informatiques n'est pas l'objectif principal, même si cela peut être un effet secondaire. Voir Veille digitale.",
+      "Bonne réponse ! La veille vise à anticiper les évolutions du marché et à identifier les innovations clés.",
+      "La création de vidéos peut faire partie d’une stratégie numérique, mais ce n'est pas l’objet de la veille.",
+      "Former tout le monde à l’IA n’est pas la finalité première de la veille digitale."
+    ]
+  },
+  {
+    question: "Quel outil est couramment utilisé pour organiser la veille ?",
+    choices: [
+      "Google Docs",
+      "Slack",
+      "Feedly",
+      "PowerPoint"
+    ],
+    correct: 2,
+    explanations: [
+      "Google Docs sert à collaborer sur des documents, pas à organiser une veille structurée.",
+      "Slack est un outil de communication interne, pas de veille.",
+      "Bonne réponse ! Feedly agrège des flux RSS pour suivre les actualités et les tendances.",
+      "PowerPoint est un outil de présentation, pas de veille."
+    ]
+  },
+  {
+    question: "La veille digitale permet de :",
+    choices: [
+      "Créer un intranet",
+      "Anticiper les menaces et saisir les opportunités",
+      "Gérer la paie",
+      "Réaliser des audits financiers"
+    ],
+    correct: 1,
+    explanations: [
+      "Créer un intranet relève d’une solution digitale, pas de la veille.",
+      "Bonne réponse ! La veille digitale sert à surveiller l’environnement et à anticiper.",
+      "La gestion de la paie concerne la RH, pas la veille.",
+      "Les audits financiers ne font pas partie de la veille digitale."
+    ]
+  },
+  {
+    question: "Qu’est-ce qu’une source fiable en veille digitale ?",
+    choices: [
+      "Un blog personnel sans référence",
+      "Un site officiel reconnu",
+      "Un forum de discussion anonyme",
+      "Une page Facebook sans modération"
+    ],
+    correct: 1,
+    explanations: [
+      "Un blog personnel peut être intéressant mais manque de fiabilité.",
+      "Bonne réponse ! Les sites officiels, revues scientifiques et plateformes spécialisées sont fiables.",
+      "Les forums anonymes ne garantissent pas la véracité des informations.",
+      "Les pages Facebook sans modération peuvent propager des rumeurs."
+    ]
+  },
+  {
+    question: "Pourquoi partager régulièrement le fruit de la veille en interne ?",
+    choices: [
+      "Pour valoriser l’équipe communication uniquement",
+      "Pour favoriser la culture d’anticipation et d’innovation",
+      "Pour respecter la loi",
+      "Pour occuper les collaborateurs"
+    ],
+    correct: 1,
+    explanations: [
+      "La valorisation de l’équipe est secondaire. L’important est le partage des connaissances.",
+      "Bonne réponse ! Le partage développe une culture d’entreprise tournée vers l’innovation.",
+      "Il n’existe pas d’obligation légale systématique.",
+      "L’objectif n’est pas d’occuper les collaborateurs mais de les faire monter en compétence."
+    ]
+  },
+  {
+    question: "Une démarche de veille structurée se compose généralement de :",
+    choices: [
+      "Recherche, analyse, diffusion",
+      "Réunion, rapport, relecture",
+      "Archivage, suppression, publication",
+      "Audit, communication, finance"
+    ],
+    correct: 0,
+    explanations: [
+      "Bonne réponse ! La veille suit le cycle : recherche > analyse > diffusion.",
+      "C’est une organisation administrative classique, pas une démarche de veille.",
+      "L’archivage et la suppression n’en font pas partie.",
+      "L’audit et la finance ne sont pas des étapes de veille digitale."
+    ]
+  },
+  {
+    question: "L’un des risques d’une veille mal organisée est :",
+    choices: [
+      "La surinformation et le manque de partage",
+      "La baisse du trafic internet",
+      "L’augmentation des congés",
+      "La réduction du budget marketing"
+    ],
+    correct: 0,
+    explanations: [
+      "Bonne réponse ! Trop d’informations mal triées nuisent à la prise de décision.",
+      "Le trafic internet n’est pas concerné.",
+      "Les congés n’ont pas de lien avec la veille.",
+      "Le budget marketing n’est pas directement lié à la veille digitale."
+    ]
+  },
+  {
+    question: "Une veille efficace doit s’appuyer sur :",
+    choices: [
+      "Des outils adaptés et des sources fiables",
+      "Le bouche-à-oreille uniquement",
+      "Des réunions mensuelles",
+      "Une seule personne référente"
+    ],
+    correct: 0,
+    explanations: [
+      "Bonne réponse ! Il faut des outils (agrégateurs, alertes) et des sources fiables.",
+      "Le bouche-à-oreille n’est pas suffisant ni structuré.",
+      "Les réunions peuvent aider mais ne suffisent pas.",
+      "La veille doit être partagée, pas centralisée sur une seule personne."
+    ]
+  },
+  {
+    question: "La veille sur l’IA, la cybersécurité et les outils collaboratifs vise à :",
+    choices: [
+      "Se tenir informé des innovations majeures",
+      "Créer un site e-commerce",
+      "Augmenter le nombre de réunions",
+      "Écrire des articles sur tous les sujets"
+    ],
+    correct: 0,
+    explanations: [
+      "Bonne réponse ! Cela permet d’anticiper les impacts des grandes tendances.",
+      "Créer un site est une démarche projet, pas de veille.",
+      "Ce n’est pas l’objectif de la veille.",
+      "La veille est ciblée, pas généraliste."
+    ]
+  },
+  {
+    question: "Un bon reporting de veille doit être :",
+    choices: [
+      "Structuré, synthétique et régulier",
+      "Très long et détaillé",
+      "Envoyé une fois par an",
+      "Réservé à la direction uniquement"
+    ],
+    correct: 0,
+    explanations: [
+      "Bonne réponse ! Pour être utile, le reporting doit être clair et exploitable.",
+      "Trop de détails noient l’information.",
+      "La veille doit être partagée fréquemment.",
+      "Elle doit bénéficier à l’ensemble des collaborateurs concernés."
+    ]
+  }
+],
+// ------------------ SUPPORT NUMERIQUE ------------------
+support: [
+  {
+    question: "Quel est l’avantage principal d’un support numérique innovant ?",
+    choices: [
+      "Proposer uniquement du texte",
+      "Favoriser l’apprentissage autonome et interactif",
+      "Limiter l’accès à l’information",
+      "Allonger la durée de formation"
+    ],
+    correct: 1,
+    explanations: [
+      "Un support innovant utilise bien plus que du texte.",
+      "Bonne réponse ! L’autonomie et l’interactivité sont au cœur de l’innovation digitale.",
+      "Au contraire, il facilite l’accès à l’information.",
+      "Il vise à réduire le temps de formation, pas à l’augmenter."
+    ]
+  },
+  {
+    question: "Un support numérique peut prendre la forme de :",
+    choices: [
+      "Un guide d’intégration interactif",
+      "Un tableau Excel imprimé",
+      "Un formulaire papier",
+      "Un dossier archivé"
+    ],
+    correct: 0,
+    explanations: [
+      "Bonne réponse ! C’est un exemple typique de support innovant.",
+      "Un tableau Excel imprimé est statique, donc peu innovant.",
+      "Le support numérique doit être digital, pas papier.",
+      "Les dossiers archivés ne servent pas d’outil d’apprentissage interactif."
+    ]
+  },
+  {
+    question: "Quel critère n’est PAS essentiel dans la conception d’un support numérique ?",
+    choices: [
+      "Interactivité",
+      "Accessibilité",
+      "Contenu actualisé",
+      "Complexité maximale"
+    ],
+    correct: 3,
+    explanations: [
+      "L’interactivité est clé dans un support innovant.",
+      "L’accessibilité est essentielle pour toucher tous les utilisateurs.",
+      "L’actualisation régulière garantit la pertinence.",
+      "Bonne réponse ! Un bon support doit rester simple et efficace."
+    ]
+  },
+  {
+    question: "Quel outil favorise le mieux la diffusion d’un support numérique interne ?",
+    choices: [
+      "Intranet collaboratif",
+      "Bulletin mural",
+      "Boîte à idées physique",
+      "Appel téléphonique"
+    ],
+    correct: 0,
+    explanations: [
+      "Bonne réponse ! L’intranet est idéal pour centraliser et diffuser des supports numériques.",
+      "Le bulletin mural n’est pas digital.",
+      "La boîte à idées est peu adaptée pour de la diffusion numérique.",
+      "Le téléphone n’est pas un support numérique."
+    ]
+  },
+  {
+    question: "L’utilisation du feedback en temps réel permet de :",
+    choices: [
+      "Maximiser l’engagement des utilisateurs",
+      "Rendre la formation ennuyeuse",
+      "Ignorer les erreurs",
+      "Réduire la motivation"
+    ],
+    correct: 0,
+    explanations: [
+      "Bonne réponse ! Le feedback immédiat rend la formation motivante et efficace.",
+      "C’est l’inverse, il la dynamise.",
+      "Le feedback sert justement à corriger les erreurs.",
+      "Il renforce la motivation, pas l’inverse."
+    ]
+  },
+  {
+    question: "Un support numérique innovant permet :",
+    choices: [
+      "D’accélérer la montée en compétences",
+      "De retarder la compréhension",
+      "D’imposer une méthode unique",
+      "D’empêcher l’adaptation"
+    ],
+    correct: 0,
+    explanations: [
+      "Bonne réponse ! L’innovation vise à rendre l’apprentissage plus rapide.",
+      "Il vise au contraire à faciliter la compréhension.",
+      "L’innovation laisse place à la personnalisation.",
+      "L’adaptation est un des objectifs principaux."
+    ]
+  },
+  {
+    question: "Pourquoi intégrer du multimédia dans un support ?",
+    choices: [
+      "Pour diversifier les formats et dynamiser l’apprentissage",
+      "Pour décourager l’utilisateur",
+      "Pour éviter la personnalisation",
+      "Pour limiter l’accès aux contenus"
+    ],
+    correct: 0,
+    explanations: [
+      "Bonne réponse ! Le multimédia favorise la mémorisation et l’intérêt.",
+      "Le but est d’encourager, pas de décourager.",
+      "Le multimédia offre justement plus de personnalisation.",
+      "Il permet de rendre le contenu plus accessible."
+    ]
+  },
+  {
+    question: "Quel suivi améliore la qualité d’un support numérique ?",
+    choices: [
+      "Le suivi des usages et des feedbacks",
+      "Ignorer les retours des utilisateurs",
+      "Limiter les mises à jour",
+      "Archiver les erreurs"
+    ],
+    correct: 0,
+    explanations: [
+      "Bonne réponse ! L’analyse des retours améliore constamment le support.",
+      "C’est l’inverse qu’il faut faire.",
+      "Les mises à jour régulières sont essentielles.",
+      "Les erreurs doivent être corrigées, pas archivées."
+    ]
+  },
+  {
+    question: "Un support numérique innovant doit être :",
+    choices: [
+      "Simple, intuitif et évolutif",
+      "Complexe, figé et obscur",
+      "Réservé à une élite",
+      "Non mis à jour"
+    ],
+    correct: 0,
+    explanations: [
+      "Bonne réponse ! L’innovation vise l’accessibilité et l’évolution constante.",
+      "Tout l’inverse de l’innovation !",
+      "Un support doit être accessible à tous.",
+      "La mise à jour régulière est essentielle."
+    ]
+  },
+  {
+    question: "Quel est le principal risque d’un support numérique mal conçu ?",
+    choices: [
+      "Désengagement des utilisateurs",
+      "Engagement maximal",
+      "Montée en compétences rapide",
+      "Adoption spontanée"
+    ],
+    correct: 0,
+    explanations: [
+      "Bonne réponse ! Un mauvais support provoque l’abandon et le désintérêt.",
+      "C’est plutôt l’effet inverse.",
+      "Ce n’est pas un bénéfice d’un mauvais support.",
+      "Un mauvais support freine l’adoption."
+    ]
+  }
+],
+// ------------------ ACQUISITION WEB ------------------
+acquisition: [
+  {
+    question: "Quel est l’objectif principal d’une campagne d’acquisition web ?",
+    choices: [
+      "Attirer de nouveaux clients",
+      "Imprimer des brochures",
+      "Organiser des séminaires internes",
+      "Créer des vidéos TikTok"
+    ],
+    correct: 0,
+    explanations: [
+      "Bonne réponse ! L’acquisition web vise à élargir la clientèle grâce au digital.",
+      "Ce n’est pas de l’acquisition web.",
+      "Les séminaires sont RH, pas acquisition.",
+      "Les vidéos peuvent aider, mais ce n’est pas le but principal."
+    ]
+  },
+  {
+    question: "Quel canal est typique d’une stratégie d’acquisition web ?",
+    choices: [
+      "Google Ads",
+      "Courrier postal",
+      "Bouche-à-oreille",
+      "Fax"
+    ],
+    correct: 0,
+    explanations: [
+      "Bonne réponse ! Google Ads est un levier incontournable.",
+      "Le courrier postal ne fait pas partie du web.",
+      "Le bouche-à-oreille est organique, pas web.",
+      "Le fax n’est pas digital !"
+    ]
+  },
+  {
+    question: "Quelle mesure indique le succès d’une campagne web ?",
+    choices: [
+      "Nombre de leads générés",
+      "Nombre de chaises dans les bureaux",
+      "Volume de café consommé",
+      "Nombre de places de parking"
+    ],
+    correct: 0,
+    explanations: [
+      "Bonne réponse ! Leads, conversions et trafic sont des indicateurs clés.",
+      "Sans rapport.",
+      "Aucun lien avec la campagne.",
+      "Le parking n’a rien à voir."
+    ]
+  },
+  {
+    question: "Quel outil permet d’analyser le trafic web ?",
+    choices: [
+      "Google Analytics",
+      "Word",
+      "Excel imprimé",
+      "Bloc-notes papier"
+    ],
+    correct: 0,
+    explanations: [
+      "Bonne réponse ! Google Analytics analyse les visites, les conversions, etc.",
+      "Word n’analyse pas de trafic.",
+      "Excel imprimé ne permet pas d’analyse web.",
+      "Un bloc-notes n’est pas digital."
+    ]
+  },
+  {
+    question: "Pour une bonne acquisition, il faut :",
+    choices: [
+      "Connaître sa cible et choisir les bons canaux",
+      "Faire au hasard",
+      "Tout miser sur un canal unique",
+      "Ignorer la concurrence"
+    ],
+    correct: 0,
+    explanations: [
+      "Bonne réponse ! Le ciblage est la base de toute stratégie d’acquisition.",
+      "Le hasard ne donne jamais de bons résultats.",
+      "Diversifier les canaux est crucial.",
+      "Il faut toujours analyser la concurrence."
+    ]
+  },
+  {
+    question: "Quel est le rôle du budget dans une campagne d’acquisition ?",
+    choices: [
+      "Optimiser les investissements pour un meilleur ROI",
+      "Dépenser au hasard",
+      "N’avoir aucun suivi",
+      "Tout mettre dans la déco"
+    ],
+    correct: 0,
+    explanations: [
+      "Bonne réponse ! Un budget bien réparti maximise l’impact.",
+      "Il faut planifier chaque dépense.",
+      "Le suivi est indispensable.",
+      "La décoration ne rapporte pas de leads."
+    ]
+  },
+  {
+    question: "Une campagne d’acquisition doit être :",
+    choices: [
+      "Testée, suivie et optimisée en continu",
+      "Lancée et oubliée",
+      "Jamais mesurée",
+      "Mise en place une seule fois"
+    ],
+    correct: 0,
+    explanations: [
+      "Bonne réponse ! C’est l’optimisation qui apporte des résultats.",
+      "Il faut toujours suivre et adapter.",
+      "La mesure est indispensable.",
+      "Il faut adapter en fonction des résultats."
+    ]
+  },
+  {
+    question: "Une landing page efficace :",
+    choices: [
+      "Transforme le visiteur en prospect",
+      "Est inutile",
+      "Doit être compliquée",
+      "Doit être hors sujet"
+    ],
+    correct: 0,
+    explanations: [
+      "Bonne réponse ! La landing page doit inciter à l’action.",
+      "Au contraire, elle est centrale.",
+      "Simplicité = efficacité.",
+      "Elle doit être parfaitement alignée avec la campagne."
+    ]
+  },
+  {
+    question: "Qu’est-ce que le retargeting ?",
+    choices: [
+      "Cibler à nouveau les visiteurs n’ayant pas converti",
+      "Ignorer les prospects",
+      "Supprimer tous les contacts",
+      "Envoyer des mails internes"
+    ],
+    correct: 0,
+    explanations: [
+      "Bonne réponse ! Le retargeting relance les prospects non convertis.",
+      "Le retargeting sert à relancer, pas ignorer.",
+      "On ne supprime pas de prospects.",
+      "Ce n’est pas du retargeting."
+    ]
+  },
+  {
+    question: "L’A/B testing permet de :",
+    choices: [
+      "Comparer deux variantes pour optimiser",
+      "Faire deux campagnes différentes sans analyse",
+      "Dupliquer tous les contenus",
+      "Ignorer les statistiques"
+    ],
+    correct: 0,
+    explanations: [
+      "Bonne réponse ! L’A/B test valide ce qui marche le mieux.",
+      "Sans analyse, l’A/B test n’a aucun intérêt.",
+      "L’idée est de tester, pas de dupliquer.",
+      "Les stats sont essentielles."
+    ]
+  }
+],
+// ------------------ SOLUTION DIGITALE ------------------
+solution: [
+  {
+    question: "Le but principal d’une solution digitale est de :",
+    choices: [
+      "Répondre à un besoin métier avec un outil numérique adapté",
+      "Créer des vidéos virales",
+      "Imprimer des flyers",
+      "Allonger les procédures"
+    ],
+    correct: 0,
+    explanations: [
+      "Bonne réponse ! Le digital doit répondre à un besoin concret.",
+      "Ce n’est pas un objectif métier.",
+      "Les flyers ne sont pas digitaux.",
+      "L’objectif est de simplifier, pas de compliquer."
+    ]
+  },
+  {
+    question: "L’UX (expérience utilisateur) est essentielle pour :",
+    choices: [
+      "Favoriser l’adoption rapide d’un outil digital",
+      "Décorer les bureaux",
+      "Augmenter les réunions",
+      "Créer des mots de passe plus longs"
+    ],
+    correct: 0,
+    explanations: [
+      "Bonne réponse ! L’UX facilite l’utilisation et l’adoption.",
+      "La déco ne fait pas partie de l’UX digitale.",
+      "L’UX vise à réduire les frictions, pas à augmenter les réunions.",
+      "L’UX ne concerne pas la sécurité uniquement."
+    ]
+  },
+  {
+    question: "Un pilotage agile d’un projet digital signifie :",
+    choices: [
+      "Adapter le projet en continu selon les retours",
+      "Tout planifier sans jamais changer",
+      "Ignorer les utilisateurs",
+      "Tout déléguer à une seule personne"
+    ],
+    correct: 0,
+    explanations: [
+      "Bonne réponse ! L’agilité = adaptation constante.",
+      "L’agilité nécessite des ajustements.",
+      "Les utilisateurs sont au cœur du processus.",
+      "Le travail d’équipe est clé."
+    ]
+  },
+  {
+    question: "Un risque majeur lors du déploiement est :",
+    choices: [
+      "La non-adoption par les utilisateurs",
+      "L’augmentation du nombre de cafés",
+      "La multiplication des imprimantes",
+      "L’absence de gestion de projet"
+    ],
+    correct: 0,
+    explanations: [
+      "Bonne réponse ! Si les utilisateurs n’adoptent pas la solution, l’échec est probable.",
+      "Cela n’a aucun impact.",
+      "L’imprimante n’a pas d’effet sur le digital.",
+      "L’absence de gestion est un risque, mais pas le seul."
+    ]
+  },
+  {
+    question: "Une étape clé dans le déploiement d’une solution digitale est :",
+    choices: [
+      "La formation des utilisateurs",
+      "L’achat de mobilier",
+      "L’organisation de sorties",
+      "La suppression des anciens outils sans transition"
+    ],
+    correct: 0,
+    explanations: [
+      "Bonne réponse ! Former les utilisateurs est central.",
+      "Mobilier : hors sujet.",
+      "Les sorties sont extra-professionnelles.",
+      "La transition doit être progressive."
+    ]
+  },
+  {
+    question: "Quelle méthode permet de mesurer l’efficacité d’une solution digitale ?",
+    choices: [
+      "Indicateurs de productivité et de satisfaction",
+      "Nombre de mails reçus",
+      "Volume de papier utilisé",
+      "Taux de présence en réunion"
+    ],
+    correct: 0,
+    explanations: [
+      "Bonne réponse ! Productivité et satisfaction sont essentiels.",
+      "Les mails ne sont pas un indicateur fiable.",
+      "Le digital vise justement à réduire le papier.",
+      "La réunion n’est pas un critère clé."
+    ]
+  },
+  {
+    question: "Quelle pratique favorise la réussite du projet ?",
+    choices: [
+      "Impliquer les utilisateurs dès le départ",
+      "Imposer l’outil sans explication",
+      "Tout garder secret jusqu’au bout",
+      "Changer d’outil chaque semaine"
+    ],
+    correct: 0,
+    explanations: [
+      "Bonne réponse ! L’implication garantit la pertinence.",
+      "L’imposition provoque le rejet.",
+      "Le secret nuit à l’adoption.",
+      "Le changement permanent déstabilise."
+    ]
+  },
+  {
+    question: "La maintenance post-lancement sert à :",
+    choices: [
+      "Corriger les bugs et améliorer l’outil",
+      "Imprimer des documents",
+      "Arrêter la solution après 1 mois",
+      "Supprimer tous les utilisateurs"
+    ],
+    correct: 0,
+    explanations: [
+      "Bonne réponse ! L’amélioration continue prolonge la vie du projet.",
+      "La maintenance est digitale, pas papier.",
+      "Il faut assurer un suivi sur la durée.",
+      "La suppression d’utilisateurs n’a pas de sens."
+    ]
+  },
+  {
+    question: "Un indicateur de succès dans un projet digital est :",
+    choices: [
+      "L’augmentation de la productivité",
+      "Le bruit dans les bureaux",
+      "Le nombre de pages imprimées",
+      "La température du bureau"
+    ],
+    correct: 0,
+    explanations: [
+      "Bonne réponse ! La productivité doit augmenter.",
+      "Ce n’est pas mesurable pour un projet digital.",
+      "Le digital vise à réduire le papier.",
+      "La température ne dépend pas du digital."
+    ]
+  },
+  {
+    question: "Quel acteur doit être associé au pilotage du projet ?",
+    choices: [
+      "Le responsable métier",
+      "Le traiteur",
+      "Le fournisseur de mobilier",
+      "Le service postal"
+    ],
+    correct: 0,
+    explanations: [
+      "Bonne réponse ! Le responsable métier connaît les besoins.",
+      "Le traiteur n’est pas concerné.",
+      "Le mobilier est hors sujet.",
+      "Le courrier n’a pas d’impact sur le digital."
+    ]
+  }
+],
+// ------------------ STRATEGIE MARKETING ------------------
+marketing: [
+  {
+    question: "Un objectif majeur d’une stratégie marketing est de :",
+    choices: [
+      "Renforcer la notoriété de la marque",
+      "Réduire la taille des bureaux",
+      "Imprimer davantage",
+      "Gérer la paie"
+    ],
+    correct: 0,
+    explanations: [
+      "Bonne réponse ! La notoriété est un pilier du marketing.",
+      "La taille des bureaux n’a aucun rapport.",
+      "Le marketing vise à dématérialiser.",
+      "La paie, c’est RH."
+    ]
+  },
+  {
+    question: "Quel canal est couramment utilisé en marketing digital ?",
+    choices: [
+      "Réseaux sociaux",
+      "Boîte aux lettres physique",
+      "Affichage en mairie",
+      "Télégramme"
+    ],
+    correct: 0,
+    explanations: [
+      "Bonne réponse ! Les réseaux sociaux sont incontournables.",
+      "Le courrier physique est peu utilisé dans le digital.",
+      "L’affichage en mairie, c’est de la communication institutionnelle.",
+      "Le télégramme n’est plus d’actualité."
+    ]
+  },
+  {
+    question: "La fidélisation client vise à :",
+    choices: [
+      "Augmenter la valeur vie client",
+      "Réduire la qualité de service",
+      "Faire partir les clients",
+      "Limiter la personnalisation"
+    ],
+    correct: 0,
+    explanations: [
+      "Bonne réponse ! La fidélisation augmente la rentabilité à long terme.",
+      "La fidélisation implique au contraire un haut niveau de service.",
+      "On souhaite garder les clients.",
+      "La personnalisation favorise la fidélisation."
+    ]
+  },
+  {
+    question: "Qu’est-ce qu’un lead ?",
+    choices: [
+      "Un prospect qualifié",
+      "Un concurrent",
+      "Un ancien salarié",
+      "Un fournisseur"
+    ],
+    correct: 0,
+    explanations: [
+      "Bonne réponse ! Le lead est un prospect à fort potentiel.",
+      "Un concurrent n’est pas un lead.",
+      "Un ancien salarié n’est pas un lead.",
+      "Un fournisseur, non plus."
+    ]
+  },
+  {
+    question: "Le SEO vise à :",
+    choices: [
+      "Améliorer le référencement naturel d’un site",
+      "Imprimer plus de flyers",
+      "Organiser des séminaires",
+      "Supprimer des pages web"
+    ],
+    correct: 0,
+    explanations: [
+      "Bonne réponse ! Le SEO améliore la visibilité d’un site sur Google.",
+      "Le SEO est digital, pas print.",
+      "Les séminaires ne sont pas du SEO.",
+      "Il vise à optimiser, pas à supprimer."
+    ]
+  },
+  {
+    question: "Une campagne multicanale implique :",
+    choices: [
+      "L’utilisation de plusieurs canaux de communication",
+      "La suppression de tous les mails",
+      "Un seul canal unique",
+      "La fin des réseaux sociaux"
+    ],
+    correct: 0,
+    explanations: [
+      "Bonne réponse ! Multicanal = plusieurs leviers utilisés ensemble.",
+      "Au contraire, les emails sont souvent un canal clé.",
+      "Le multicanal = diversité.",
+      "Les réseaux sociaux sont centraux en marketing digital."
+    ]
+  },
+  {
+    question: "Un KPI est :",
+    choices: [
+      "Un indicateur clé de performance",
+      "Une méthode de recrutement",
+      "Un logiciel de dessin",
+      "Une technique de brainstorming"
+    ],
+    correct: 0,
+    explanations: [
+      "Bonne réponse ! Les KPI permettent de mesurer l’efficacité.",
+      "Ce n’est pas RH.",
+      "Ce n’est pas un outil graphique.",
+      "C’est un outil d’analyse, pas de créativité."
+    ]
+  },
+  {
+    question: "L’A/B testing en marketing digital permet de :",
+    choices: [
+      "Comparer deux variantes d’une campagne",
+      "Créer des bugs",
+      "Organiser des réunions",
+      "Arrêter une campagne"
+    ],
+    correct: 0,
+    explanations: [
+      "Bonne réponse ! Cela permet d’optimiser les résultats.",
+      "Le but est d’améliorer, pas de créer des problèmes.",
+      "Ce n’est pas un outil de réunion.",
+      "L’objectif est l’optimisation."
+    ]
+  },
+  {
+    question: "La valeur vie client (CLV) mesure :",
+    choices: [
+      "La rentabilité générée par un client tout au long de sa relation avec l’entreprise",
+      "Le nombre de visites sur un site",
+      "Le nombre d’articles de blog publiés",
+      "La taille de la newsletter"
+    ],
+    correct: 0,
+    explanations: [
+      "Bonne réponse ! C’est un indicateur de fidélisation.",
+      "Cela ne mesure que le trafic.",
+      "Les articles de blog ne mesurent pas la fidélisation.",
+      "La taille de la newsletter n’a rien à voir."
+    ]
+  },
+  {
+    question: "Le content marketing consiste à :",
+    choices: [
+      "Créer et diffuser des contenus à forte valeur ajoutée",
+      "Acheter des bases mails",
+      "Envoyer uniquement des promotions",
+      "Supprimer son site internet"
+    ],
+    correct: 0,
+    explanations: [
+      "Bonne réponse ! Le contenu est au cœur de l’attraction client.",
+      "C’est une mauvaise pratique.",
+      "Le content marketing ne se limite pas à la promotion.",
+      "La suppression du site est l’inverse du content marketing."
+    ]
+  }
+],
+// ------------------ PROCEDURES ------------------
+procedures: [
+  {
+    question: "Le principal objectif d’un tutoriel numérique est de :",
+    choices: [
+      "Guider pas à pas l’utilisateur",
+      "Imposer une méthode rigide",
+      "Allonger la procédure",
+      "Ignorer les feedbacks"
+    ],
+    correct: 0,
+    explanations: [
+      "Bonne réponse ! Le tutoriel simplifie la compréhension.",
+      "Le but est d’accompagner, pas d’imposer.",
+      "On cherche la simplicité.",
+      "Les feedbacks sont essentiels."
+    ]
+  },
+  {
+    question: "Quel format est le plus interactif pour un tutoriel ?",
+    choices: [
+      "Vidéo animée avec quiz",
+      "Notice imprimée",
+      "PDF figé",
+      "Message vocal"
+    ],
+    correct: 0,
+    explanations: [
+      "Bonne réponse ! L’interactivité est clé.",
+      "Le papier n’est pas interactif.",
+      "Un PDF n’offre pas d’interaction.",
+      "Le message vocal est limité."
+    ]
+  },
+  {
+    question: "Une bonne procédure interne doit être :",
+    choices: [
+      "Clair, structuré et à jour",
+      "Long et complexe",
+      "Réservé à la direction",
+      "Jamais actualisé"
+    ],
+    correct: 0,
+    explanations: [
+      "Bonne réponse ! La clarté est la priorité.",
+      "La simplicité est de mise.",
+      "Elle doit être partagée à tous.",
+      "Les mises à jour sont cruciales."
+    ]
+  },
+  {
+    question: "Quel est l’effet d’un tutoriel bien conçu ?",
+    choices: [
+      "Réduire les demandes d’assistance",
+      "Augmenter les erreurs",
+      "Freiner la formation",
+      "Créer de la confusion"
+    ],
+    correct: 0,
+    explanations: [
+      "Bonne réponse ! Un bon tutoriel évite les erreurs.",
+      "C’est l’inverse.",
+      "Il la rend plus efficace.",
+      "La clarté évite la confusion."
+    ]
+  },
+  {
+    question: "Pour évaluer un tutoriel, on mesure :",
+    choices: [
+      "Le taux de complétion et la satisfaction utilisateur",
+      "Le nombre de pages imprimées",
+      "Le temps passé à chercher des erreurs",
+      "La taille du fichier"
+    ],
+    correct: 0,
+    explanations: [
+      "Bonne réponse ! Ce sont les vrais indicateurs.",
+      "Le papier n’est pas l’objectif.",
+      "Le tutoriel doit éviter les recherches d’erreur.",
+      "La taille n’est pas un critère."
+    ]
+  },
+  {
+    question: "Un tutoriel interactif permet de :",
+    choices: [
+      "Personnaliser l’apprentissage",
+      "Standardiser sans adaptation",
+      "Ignorer les besoins",
+      "Garder les contenus secrets"
+    ],
+    correct: 0,
+    explanations: [
+      "Bonne réponse ! L’interactivité favorise la personnalisation.",
+      "Il faut adapter selon les besoins.",
+      "Les besoins utilisateurs sont prioritaires.",
+      "La diffusion est clé."
+    ]
+  },
+  {
+    question: "Quelle erreur limiter grâce à une procédure claire ?",
+    choices: [
+      "Les oublis et mauvaises manipulations",
+      "L’innovation",
+      "La créativité",
+      "Les formations"
+    ],
+    correct: 0,
+    explanations: [
+      "Bonne réponse ! Une procédure bien faite évite les erreurs.",
+      "Au contraire, la procédure structure l’innovation.",
+      "La créativité doit être encadrée.",
+      "La formation n’est pas une erreur."
+    ]
+  },
+  {
+    question: "Quel canal favorise le partage de tutoriels ?",
+    choices: [
+      "Intranet ou portail RH",
+      "Boîte postale",
+      "Réunion annuelle",
+      "Tableau d’affichage"
+    ],
+    correct: 0,
+    explanations: [
+      "Bonne réponse ! L’intranet centralise l’accès.",
+      "Le courrier n’est pas digital.",
+      "Le partage doit être continu.",
+      "L’affichage est limité."
+    ]
+  },
+  {
+    question: "Un feedback utilisateur sert à :",
+    choices: [
+      "Améliorer le tutoriel",
+      "Ignorer les erreurs",
+      "Réduire la diffusion",
+      "Empêcher l’accès"
+    ],
+    correct: 0,
+    explanations: [
+      "Bonne réponse ! Les retours permettent d’améliorer.",
+      "C’est tout l’inverse.",
+      "La diffusion est un objectif.",
+      "L’accès doit être facilité."
+    ]
+  },
+  {
+    question: "Un tutoriel doit être :",
+    choices: [
+      "Évolutif et facile à mettre à jour",
+      "Figé et jamais modifié",
+      "Reservé à un expert",
+      "Non partagé"
+    ],
+    correct: 0,
+    explanations: [
+      "Bonne réponse ! Il doit évoluer avec les besoins.",
+      "La mise à jour est essentielle.",
+      "Accessible à tous.",
+      "Le partage est clé."
+    ]
+  }
+],
+// ------------------ GOOGLE ADS ------------------
+ads: [
+  {
+    question: "Google Ads permet de diffuser des annonces sur :",
+    choices: [
+      "Search, Display, Vidéo, Shopping et Apps",
+      "Télévision uniquement",
+      "Magazines papier",
+      "Radio FM"
+    ],
+    correct: 0,
+    explanations: [
+      "Bonne réponse ! C’est la puissance multicanal de Google Ads.",
+      "La télévision est hors scope.",
+      "Le papier n’est pas digital.",
+      "La radio n’est pas un canal Google Ads."
+    ]
+  },
+  {
+    question: "L’objectif principal d’une stratégie multicanal est :",
+    choices: [
+      "Maximiser la visibilité à chaque étape du parcours d’achat",
+      "Réduire le nombre de canaux utilisés",
+      "Se concentrer sur un seul public",
+      "Limiter les conversions"
+    ],
+    correct: 0,
+    explanations: [
+      "Bonne réponse ! Plus de canaux = plus de points de contact.",
+      "L’idée est justement de diversifier.",
+      "On veut toucher plusieurs segments.",
+      "L’objectif est d’augmenter les conversions."
+    ]
+  },
+  {
+    question: "Le retargeting avec Google Ads sert à :",
+    choices: [
+      "Recibler les visiteurs n’ayant pas converti",
+      "Ignorer les anciens visiteurs",
+      "Supprimer les campagnes",
+      "Arrêter le marketing"
+    ],
+    correct: 0,
+    explanations: [
+      "Bonne réponse ! Le retargeting relance ceux qui sont venus sans agir.",
+      "C’est l’inverse.",
+      "Le but est d’optimiser, pas de supprimer.",
+      "Le marketing continue en permanence."
+    ]
+  },
+  {
+    question: "Quel indicateur mesure l’efficacité d’une campagne Ads ?",
+    choices: [
+      "Le taux de conversion (conversion rate)",
+      "La couleur des bannières",
+      "Le nombre de réunions",
+      "La taille des équipes"
+    ],
+    correct: 0,
+    explanations: [
+      "Bonne réponse ! Le taux de conversion montre la performance.",
+      "Le design est important, mais pas suffisant.",
+      "Les réunions ne sont pas un KPI.",
+      "La taille de l’équipe n’influence pas le ROI."
+    ]
+  },
+  {
+    question: "Une bonne gestion budgétaire implique :",
+    choices: [
+      "Répartir les budgets selon les performances attendues",
+      "Tout miser sur un seul canal",
+      "Ne jamais analyser les résultats",
+      "Ignorer le coût d’acquisition"
+    ],
+    correct: 0,
+    explanations: [
+      "Bonne réponse ! Le suivi budgétaire optimise les résultats.",
+      "La diversification est clé.",
+      "L’analyse continue est indispensable.",
+      "Le coût d’acquisition est un KPI fondamental."
+    ]
+  },
+  {
+    question: "Google Shopping permet de promouvoir :",
+    choices: [
+      "Des produits e-commerce directement dans Google",
+      "Des formations en présentiel",
+      "Des réunions d’équipe",
+      "Des événements sportifs"
+    ],
+    correct: 0,
+    explanations: [
+      "Bonne réponse ! Google Shopping cible les acheteurs prêts à acheter.",
+      "Ce n’est pas l’objet de Shopping.",
+      "Les réunions n’ont rien à voir.",
+      "Les événements sportifs relèvent d’autres canaux."
+    ]
+  },
+  {
+    question: "Le suivi des conversions sur Google Ads sert à :",
+    choices: [
+      "Mesurer l’efficacité de chaque campagne",
+      "Ignorer les résultats",
+      "Ajouter plus de canaux sans analyse",
+      "Augmenter le budget sans contrôle"
+    ],
+    correct: 0,
+    explanations: [
+      "Bonne réponse ! On optimise ce qui se mesure.",
+      "Au contraire, il faut analyser.",
+      "L’ajout de canaux doit être mesuré.",
+      "Le contrôle budgétaire est essentiel."
+    ]
+  },
+  {
+    question: "Un taux de clic élevé (CTR) indique :",
+    choices: [
+      "Un bon engagement sur l’annonce",
+      "Une mauvaise pertinence",
+      "Un problème technique",
+      "Un manque de ciblage"
+    ],
+    correct: 0,
+    explanations: [
+      "Bonne réponse ! Plus le CTR est haut, mieux c’est.",
+      "Un faible CTR indique un manque de pertinence.",
+      "Les problèmes techniques font baisser le CTR.",
+      "Un mauvais ciblage fait aussi baisser le CTR."
+    ]
+  },
+  {
+    question: "Quel canal Google Ads est le plus adapté à la notoriété ?",
+    choices: [
+      "Display et YouTube",
+      "Fax",
+      "Lettre recommandée",
+      "Email interne"
+    ],
+    correct: 0,
+    explanations: [
+      "Bonne réponse ! Le display et la vidéo (YouTube) maximisent la visibilité.",
+      "Le fax n’est pas digital.",
+      "Le courrier est hors scope.",
+      "L’email interne n’est pas une campagne Ads."
+    ]
+  },
+  {
+    question: "L’optimisation continue d’une campagne Ads passe par :",
+    choices: [
+      "L’ajustement des ciblages, enchères et messages",
+      "Ne rien changer",
+      "Arrêter toutes les campagnes",
+      "Changer de canal chaque jour"
+    ],
+    correct: 0,
+    explanations: [
+      "Bonne réponse ! Ajuster, tester, analyser sont les clés du succès.",
+      "L’optimisation nécessite des adaptations permanentes.",
+      "L’arrêt total n’apporte rien.",
+      "La stabilité des canaux permet l’analyse."
+    ]
+  }
+]
+};
+
+/* ==== LOGIQUE DU QUIZ ==== */
+let currentTheme = "";
+let currentScore = 0;
+let currentAnswers = [];
+
+function createQuiz(theme) {
+  const container = document.getElementById("quizContainer");
+  container.innerHTML = "";
+  if (!quizData[theme]) {
+    container.innerHTML = "<p>Sélectionnez un thème pour commencer le quiz.</p>";
+    return;
+  }
+  currentTheme = theme;
+  currentScore = 0;
+  currentAnswers = [];
+  const questions = quizData[theme];
+
+  questions.forEach((q, idx) => {
+    const block = document.createElement("div");
+    block.className = "quiz-question";
+    let html = `<p><strong>Q${idx + 1} :</strong> ${q.question}</p>`;
+    html += '<ul>';
+    q.choices.forEach((choice, cidx) => {
+      html += `
+      <li>
+        <label>
+          <input type="radio" name="q${idx}" value="${cidx}">
+          ${choice}
+        </label>
+      </li>`;
+    });
+    html += '</ul>';
+    html += `<div class="quiz-feedback" id="feedback-q${idx}"></div>`;
+    block.innerHTML = html;
+    container.appendChild(block);
+  });
+
+  const btn = document.createElement("button");
+  btn.textContent = "Valider mes réponses";
+  btn.onclick = checkQuiz;
+  btn.className = "quiz-submit-btn";
+  container.appendChild(btn);
+
+  // Bouton téléchargement PDF
+  const dlBtn = document.createElement("button");
+  dlBtn.textContent = "Télécharger mon score en PDF";
+  dlBtn.onclick = downloadPDF;
+  dlBtn.className = "quiz-download-btn";
+  container.appendChild(dlBtn);
+}
+
+function checkQuiz() {
+  const questions = quizData[currentTheme];
+  let score = 0;
+  currentAnswers = [];
+  questions.forEach((q, idx) => {
+    const checked = document.querySelector(`input[name="q${idx}"]:checked`);
+    let feedback = document.getElementById(`feedback-q${idx}`);
+    if (!checked) {
+      feedback.innerHTML = "<span style='color: orange'>Vous n'avez pas répondu.</span>";
+      currentAnswers.push(null);
+    } else {
+      const val = parseInt(checked.value);
+      currentAnswers.push(val);
+      if (val === q.correct) {
+        feedback.innerHTML = "<span style='color: green;'>✅ Bonne réponse !</span>";
+        score++;
+      } else {
+        feedback.innerHTML = `<span style='color: red;'>❌ Mauvaise réponse : ${q.explanations[val]}</span>`;
+      }
+    }
+  });
+  currentScore = score;
+  const container = document.getElementById("quizContainer");
+  let resultMsg = `<div class="quiz-result">Votre score : <strong>${score} / ${questions.length}</strong></div>`;
+  if (!document.querySelector(".quiz-result")) {
+    container.insertAdjacentHTML('beforeend', resultMsg);
+  } else {
+    document.querySelector(".quiz-result").innerHTML = `Votre score : <strong>${score} / ${questions.length}</strong>`;
+  }
+}
+
+function downloadPDF() {
+  if (typeof window.jspdf === "undefined" && typeof window.jsPDF === "undefined") {
+    alert("jsPDF n'est pas chargé. Ajoute le script jsPDF dans ton HTML.");
+    return;
+  }
+  const PDF = window.jspdf ? window.jspdf.jsPDF : window.jsPDF;
+  const questions = quizData[currentTheme];
+  const doc = new PDF();
+  let y = 10;
+  doc.text(`Quiz : ${currentTheme.charAt(0).toUpperCase() + currentTheme.slice(1)}`, 10, y);
+  y += 10;
+  questions.forEach((q, idx) => {
+    doc.text(`Q${idx + 1}: ${q.question}`, 10, y);
+    y += 8;
+    const rep = currentAnswers[idx] !== null && typeof currentAnswers[idx] !== "undefined" ? q.choices[currentAnswers[idx]] : "Non répondu";
+    doc.text(`Votre réponse : ${rep}`, 12, y);
+    y += 8;
+    if (currentAnswers[idx] !== q.correct) {
+      doc.text(`Explication : ${q.explanations[currentAnswers[idx]] || "Non répondu"}`, 12, y);
+      y += 8;
+    }
+  });
+  y += 5;
+  doc.text(`Score : ${currentScore} / ${questions.length}`, 10, y);
+  doc.save(`quiz_${currentTheme}.pdf`);
+}
+
+// Sélection du thème quiz
+document.addEventListener("DOMContentLoaded", function() {
+  document.getElementById("quizSelect").addEventListener("change", function(e) {
+    createQuiz(e.target.value);
+  });
+});
+</script>
 </body>
 </html>
+
+
+<section id="etude-cas" class="panel">
+  <h2>Étude de cas : Digitalisation de la Mairie de Sens</h2>
+  <div style="margin-bottom:2rem;">
+    <strong>Introduction :</strong>
+    <p>
+      En 2024, la Ville de Sens a initié une démarche ambitieuse de transformation digitale. <strong>L’objectif :</strong> fluidifier la communication interne et externe, optimiser l’accueil du public et automatiser des tâches administratives pour renforcer la satisfaction des agents et des usagers. Voici un retour d’expérience structuré, étape par étape, sur ce projet d’envergure.
+    </p>
+  </div>
+
+  <!-- 1. Veille digitale -->
+  <h3>1. Conception d’une démarche de veille sur les innovations digitales</h3>
+  <p>
+    Une équipe projet a été créée afin d’identifier les meilleures solutions technologiques adaptées au secteur public. Grâce à un outil de veille (Feedly + newsletter dédiée), des sujets comme la dématérialisation des procédures, la cybersécurité et l’IA dans la gestion administrative ont été suivis chaque semaine.
+  </p>
+  <img src="https://quickchart.io/chart?c={type:'pie',data:{labels:['Dématérialisation','Cybersécurité','IA','Outils collaboratifs'],datasets:[{data:[45,20,25,10]}]}}" alt="Répartition thématique de la veille digitale" style="max-width:350px;display:block;margin:1em auto;">
+
+  <!-- 2. Support numérique innovant -->
+  <h3>2. Conception d’un support numérique innovant</h3>
+  <p>
+    Pour accélérer l’intégration des nouveaux agents, des tutoriels vidéo et guides interactifs (Canva, Powtoon) ont été produits. Ces supports couvrent la prise en main du logiciel métier et la gestion du portail famille pour les citoyens.
+  </p>
+  <img src="https://quickchart.io/chart?c={type:'bar',data:{labels:['Tutoriels vidéo','Guides PDF','FAQ interactive'],datasets:[{label:'Satisfaction (%)',data:[92,85,77]}]}}" alt="Satisfaction des supports numériques" style="max-width:350px;display:block;margin:1em auto;">
+
+  <!-- 3. Campagne d’acquisition web -->
+  <h3>3. Conception et déploiement d’une campagne d’acquisition sur le Web</h3>
+  <p>
+    Pour faire connaître les nouveaux services en ligne, une campagne Facebook/Instagram et des posts LinkedIn ciblant les familles de Sens ont été lancés : +500 abonnés en 2 mois, 170 % d’augmentation du trafic sur le portail citoyen.
+  </p>
+  <img src="https://quickchart.io/chart?c={type:'line',data:{labels:['Avant','M-1','M-2','Après'],datasets:[{label:'Visites portail',data:[800,1200,1800,2160]}]}}" alt="Évolution du trafic web" style="max-width:350px;display:block;margin:1em auto;">
+
+  <!-- 4. Solution digitale -->
+  <h3>4. Réalisation, mise en œuvre et pilotage d’une solution digitale</h3>
+  <p>
+    <strong>La mairie a intégré un guichet numérique :</strong>prise de rendez-vous en ligne, formulaire multilingue et espace usager sécurisé. Résultat : -45 % de files d’attente physiques, +31 % de demandes traitées en moins de 48h.
+  </p>
+  <img src="https://quickchart.io/chart?c={type:'doughnut',data:{labels:['Traitement -48h','Traitement +48h'],datasets:[{data:[62,38]}]}}" alt="Délais de traitement" style="max-width:350px;display:block;margin:1em auto;">
+
+  <!-- 5. Stratégie marketing -->
+  <h3>5. Stratégie marketing</h3>
+  <p>
+    <strong>Une charte graphique commune a été diffusée sur tous les supports : </strong>site, flyers, signatures mail. Des indicateurs de performance (KPI) ont été suivis tous les mois via Google Analytics : taux de rebond, provenance des usagers, clics sur les tutos vidéo.
+  </p>
+  <img src="https://quickchart.io/chart?c={type:'bar',data:{labels:['Site web','Réseaux sociaux','Flyers'],datasets:[{label:'Audience',data:[1800,700,200]}]}}" alt="Comparatif audience supports" style="max-width:350px;display:block;margin:1em auto;">
+
+  <!-- 6. Tutoriels & procédures -->
+  <h3>6. Tutoriels & procédures</h3>
+  <p>
+    <strong>Des procédures digitalisées ont été créées :</strong> réservation de créneau, dépôt de documents, FAQ en ligne. Chaque agent a suivi une formation e-learning avec quiz final : 96 % de taux de réussite et +40 % de gain de temps sur la gestion des demandes récurrentes.
+  </p>
+  <img src="https://quickchart.io/chart?c={type:'horizontalBar',data:{labels:['Avant formation','Après formation'],datasets:[{label:'Temps de traitement (min)',data:[20,12]}]}}" alt="Gain de temps sur les procédures" style="max-width:350px;display:block;margin:1em auto;">
+
+  <!-- 7. Google Ads : Stratégies multicanal -->
+  <h3>7. Google Ads : Stratégies multicanal</h3>
+  <p>
+    En complément, une campagne Google Ads ciblant “démarches administratives en ligne Sens” a permis d’accroître la visibilité auprès des nouveaux arrivants. Résultat : 1 320 clics qualifiés en 4 semaines pour 89 € investis (coût moyen : 0,07 €/clic).
+  </p>
+  <img src="https://quickchart.io/chart?c={type:'pie',data:{labels:['Clics qualifiés','Autres'],datasets:[{data:[1320,210]}]}}" alt="Répartition des clics Google Ads" style="max-width:350px;display:block;margin:1em auto;">
+
+  <!-- Conclusion -->
+  <div style="margin-top:2rem;">
+    <strong>Conclusion :</strong>
+    <p>
+      Ce projet a démontré l’importance d’une approche globale, mêlant veille, innovation pédagogique, communication web et outils numériques pour transformer en profondeur la relation usager-collectivité. Les gains : efficacité, autonomie des agents, satisfaction des citoyens, et meilleure attractivité du territoire.
+    </p>
+  </div>
+</section>
+
+
+<!-- ACTUALITES -->
+<section id="actus" class="panel">
+  <div class="actus-feed">
+    <h4>Actualités – Flux Google News</h4>
+    
+    <!-- Flux Google News général sur la transformation digitale -->
+    <iframe width="100%" height="400" src="https://rss.app/embed/v1/list/tT2VGKPFDiSMXhQG" frameborder="0"></iframe>
+    <br>
+    <!-- Flux Google News sur un autre sujet -->
+    <iframe width="100%" height="400" src="https://rss.app/embed/v1/list/t6Z6qdIYiLnteBPz" frameborder="0"></iframe>
+    <br>
+    <!-- Flux Google News RH -->
+    <iframe width="100%" height="400" src="https://rss.app/embed/v1/list/tnBcmHwniIi5R70v" frameborder="0"></iframe>
+    <br>
+    <!-- Flux Google News Management du changement -->
+    <iframe width="100%" height="400" src="https://rss.app/embed/v1/list/tme3UhMaqZiEgIwM" frameborder="0"></iframe>
+    <p style="font-size:0.93em;color:#999;">
+      Actualités automatiques générées via <a href="https://rss.app/fr/" target="_blank">rss.app</a>.  
+      <br>Pour modifier un flux : va sur rss.app, génère un nouveau widget et remplace le lien <code>src="..."</code>.
+    </p>
+  </div>
+</section>
+
+<!-- SANTÉ MENTALE AU TRAVAIL – FPT - CSS Spécifique -->
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* ---- CSS Spécifique à la section Santé mentale ---- */
+#sante-mentale-fpt {
+  margin: 32px 0;
+  border-radius: 18px;
+  background: #fafff3;
+  box-shadow: 0 4px 32px #e5efdb;
+}
+#sante-mentale-fpt header { text-align: center; padding: 32px 0 16px 0; background: #fafff3; box-shadow: 0 2px 8px #f4f6e4; border-radius: 18px 18px 0 0;}
+#sante-mentale-fpt .app-title { font-size: 2.2rem; font-weight: 800; color: #7fb900; margin-bottom: 10px; letter-spacing: 1.5px;}
+#sante-mentale-fpt .app-desc { font-size: 1.08rem; color: #495c37; margin-bottom: 18px;}
+#sante-mentale-fpt .tabs { display: flex; justify-content: center; gap: 28px; margin-bottom: 12px; flex-wrap: wrap;}
+#sante-mentale-fpt .tab { padding: 12px 32px; border-radius: 18px; background: #fffbe7; border: 2.5px solid #ffeb99; font-weight: 700; color: #bdaa19; cursor: pointer; transition: 0.17s; box-shadow: 0 1px 8px #f7f5e6; font-size: 1.07rem; margin-bottom: 8px; min-width: 158px; text-align: center;}
+#sante-mentale-fpt .tab.active, #sante-mentale-fpt .tab:hover { background: #e6ffe1; color: #119a3d; border-color: #a6e9af; box-shadow: 0 2px 14px #c7f6d2; transform: scale(1.04);}
+#sante-mentale-fpt .tab[data-cat="B"] { background: #e7fff0; color: #3ca741; border-color: #baffd5;}
+#sante-mentale-fpt .tab[data-cat="B"].active, #sante-mentale-fpt .tab[data-cat="B"]:hover {background: #f9fbd4; color: #5ba835;}
+#sante-mentale-fpt .tab[data-cat="C"] { background: #e7f6ff; color: #399fc7; border-color: #b1deff;}
+#sante-mentale-fpt .tab[data-cat="C"].active, #sante-mentale-fpt .tab[data-cat="C"]:hover {background: #fff7e7; color: #b48b19;}
+#sante-mentale-fpt .tab.news-tab { background: #f3f7ff; color: #2181be; border-color: #99c7fa;}
+#sante-mentale-fpt .tab.news-tab.active, #sante-mentale-fpt .tab.news-tab:hover {background: #f6fffb; color: #10af74; border-color: #9cffdf;}
+#sante-mentale-fpt .tab.notes-tab { background: #ffe7fa; color: #a22e84; border-color: #fcabe8;}
+#sante-mentale-fpt .tab.notes-tab.active, #sante-mentale-fpt .tab.notes-tab:hover {background: #fffbe6; color: #be7014; border-color: #fde899;}
+#sante-mentale-fpt .main { max-width: 1040px; margin: 30px auto; background: #fffffa; border-radius: 26px; box-shadow: 0 8px 32px #e6ecd2; padding: 34px 32px 28px 32px; min-height: 570px;}
+#sante-mentale-fpt .cat-banner { display: flex; align-items: center; gap: 18px; border-radius: 15px; padding: 18px 24px; margin-bottom: 18px; margin-top: 5px; font-size: 1.2rem; font-weight: 700; letter-spacing: 1.2px; box-shadow: 0 2px 8px #e5edd6;}
+#sante-mentale-fpt .cat-A { background: #fffbe7; color: #bdaa19; border-left: 8px solid #ffe35c;}
+#sante-mentale-fpt .cat-B { background: #e7fff0; color: #36ab6c; border-left: 8px solid #90eaa3;}
+#sante-mentale-fpt .cat-C { background: #e7f6ff; color: #399fc7; border-left: 8px solid #81caff;}
+#sante-mentale-fpt .cat-icon { font-size: 2rem; margin-right: 8px; vertical-align: middle;}
+#sante-mentale-fpt h2 { color: #77ad38; font-size: 1.31rem; margin-bottom: 18px; margin-top: 18px;}
+#sante-mentale-fpt .emotions-section { margin-bottom: 22px; background: #fcffe7; border-radius: 18px; box-shadow: 0 2px 10px #f6fbd4; padding: 22px 18px 12px 18px; display: flex; flex-wrap: wrap; align-items: center; gap: 34px; justify-content: space-between;}
+#sante-mentale-fpt .emotions-info { flex: 2.3; min-width: 230px; }
+#sante-mentale-fpt .emotion-flower { flex: 1.4; min-width: 210px; display: flex; flex-direction: column; align-items: center; gap: 5px; }
+#sante-mentale-fpt .flower-btn { border-radius: 50%; width: 58px; height: 58px; margin: 5px 5px 2px 5px; border: 0; font-weight: bold; color: #fff; font-size: 1.03rem; cursor: pointer; outline: none; transition: 0.14s; box-shadow: 0 2px 10px #e9e9c2;}
+#sante-mentale-fpt .joy { background: #ffe86c; color: #6b6c01;}
+#sante-mentale-fpt .sad { background: #b3d9ed;}
+#sante-mentale-fpt .angry { background: #ffb6b1;}
+#sante-mentale-fpt .fear { background: #c0bfff;}
+#sante-mentale-fpt .surprise { background: #fff3ac; color: #aa8000;}
+#sante-mentale-fpt .disgust { background: #a3d995;}
+#sante-mentale-fpt .flower-center {background: #f8fbe9; color: #61601f; width: 44px; height: 44px; font-size:1rem;}
+#sante-mentale-fpt .selected-emotion {font-weight: 700; color: #1a9217; font-size: 1.12rem;}
+#sante-mentale-fpt .emotions-extra { font-size:0.97rem; color:#537542; margin-top: 6px; }
+#sante-mentale-fpt .daily-section { margin-bottom: 22px; background: #f8fbe9; border-radius: 15px; box-shadow: 0 1px 6px #e3eec2; padding: 20px 15px 12px 15px;}
+#sante-mentale-fpt .daily-section label { font-weight: 600; }
+#sante-mentale-fpt .daily-section input, #sante-mentale-fpt .daily-section select, #sante-mentale-fpt .daily-section textarea { border-radius: 7px; border: 1.1px solid #b7e2bc; background: #fafdff; padding: 7px 9px; margin-bottom: 11px; margin-top: 2px; width: 97%; font-size: 1.03rem; box-sizing: border-box;}
+#sante-mentale-fpt .daily-section textarea {resize: vertical;}
+#sante-mentale-fpt .daily-section .history { margin-top: 12px; background: #f3fddc; border-radius: 9px; padding: 8px 12px; font-size: .98rem; color: #4f6e3c; box-shadow: 0 1px 4px #d6e8c2; max-height: 100px; overflow-y: auto;}
+#sante-mentale-fpt .synthese-section { background: #e7ffe9; border-radius: 12px; box-shadow: 0 1px 6px #e3eec2; padding: 15px 16px 8px 16px; margin-bottom: 16px; color: #355f40; font-size: 1.07rem;}
+#sante-mentale-fpt #moodChart, #sante-mentale-fpt #monthlyMoodChart { background: #fff; border-radius:12px; margin-bottom:10px;}
+#sante-mentale-fpt .tips-section { border-radius: 17px; box-shadow: 0 2px 10px #f5fae7; margin-bottom: 18px; padding: 20px 14px; border-left: 8px solid #ffe35c; background: #fffbe7;}
+#sante-mentale-fpt .tips-section.cat-B { border-left: 8px solid #90eaa3; background: #e7fff0;}
+#sante-mentale-fpt .tips-section.cat-C { border-left: 8px solid #81caff; background: #e7f6ff;}
+#sante-mentale-fpt .tips-section ul {margin: 0 0 0 18px;}
+#sante-mentale-fpt .tips-section li {margin-bottom: 7px;}
+#sante-mentale-fpt .stress-btn { background: #ffe35c; color: #938000; font-weight: bold; border: none; padding: 9px 16px; border-radius: 12px; cursor: pointer; transition: .12s; margin-top: 10px; margin-left: 6px; font-size: 1.03rem;}
+#sante-mentale-fpt .stress-btn:hover { background: #f9d12e; color: #2d2500;}
+#sante-mentale-fpt .ressources-section { margin-top: 25px; background: #f9faf6; border-radius: 13px; box-shadow: 0 2px 6px #e7eddb; padding: 18px 14px; font-size: 1.01rem;}
+#sante-mentale-fpt .news-section, #sante-mentale-fpt .notes-section { margin: 28px 0 20px 0; background: #e7f6ff; border-radius: 20px; box-shadow: 0 2px 10px #e3eefb; padding: 30px 22px 25px 22px; font-size: 1.09rem; color: #256296; display: none;}
+#sante-mentale-fpt .news-section.active, #sante-mentale-fpt .notes-section.active { display: block; animation: fadeIn .6s;}
+#sante-mentale-fpt .notes-section { background: #fff3fb; color: #9c267c; box-shadow: 0 2px 10px #f5e1ee;}
+#sante-mentale-fpt .notes-title { color: #b72e8e; margin-bottom:14px; font-size: 1.22rem;}
+#sante-mentale-fpt .notes-section textarea { width: 99%; min-height: 80px; font-size: 1.1rem; border-radius: 8px; border: 1.3px solid #f6b1e6; padding: 8px 10px; margin-bottom: 10px; background: #fdf7fa;}
+#sante-mentale-fpt .save-notes-btn { background: #eb7abe; color: #fff; font-weight: bold; border: none; border-radius: 11px; padding: 8px 16px; cursor: pointer; transition: 0.13s; font-size: 1.01rem;}
+#sante-mentale-fpt .save-notes-btn:hover {background: #d53fa7;}
+@keyframes fadeIn { 0% {opacity:0;} 100% {opacity:1;}}
+#sante-mentale-fpt .modal-bg { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(40,65,52,0.23); z-index: 90; justify-content: center; align-items: center;}
+#sante-mentale-fpt .modal-bg.active { display: flex;}
+#sante-mentale-fpt .modal-content { background: #fffffa; border-radius: 21px; box-shadow: 0 6px 44px #c1e3b9; padding: 31px 22px 20px 22px; max-width: 440px; font-size: 1.06rem; color: #315a2c; position: relative;}
+#sante-mentale-fpt .modal-content h3 { color: #98bb26;}
+#sante-mentale-fpt .close-modal { position: absolute; top: 10px; right: 17px; background: #ffeee0; color: #a03c3c; border: none; font-size: 1.3rem; border-radius: 50%; width: 30px; height: 30px; cursor: pointer;}
+@media (max-width: 800px) { #sante-mentale-fpt .main {padding: 10px;} #sante-mentale-fpt .emotions-section {flex-direction: column;} #sante-mentale-fpt .emotion-flower {margin-top: 12px;}}
+@media (max-width: 600px) { #sante-mentale-fpt .main {padding: 1px;} #sante-mentale-fpt .emotions-section {gap: 9px;} #sante-mentale-fpt .emotion-flower {min-width: 150px;} #sante-mentale-fpt .tab {padding: 7px 8vw; font-size:.97rem;}}
+</style>
+
+<!-- SANTÉ MENTALE AU TRAVAIL – FPT (Début de la section) -->
+<section id="sante-mentale-fpt" class="panel">
+  <header>
+    <div class="app-title">Santé Mentale au Travail<br>Fonction Publique Territoriale</div>
+    <div class="app-desc">Un espace d’écoute, de conseils et de ressources pour tous les agents, quelle que soit votre catégorie.</div>
+    <div class="tabs">
+      <div class="tab active" data-cat="A" onclick="switchTab('A')">Catégorie A</div>
+      <div class="tab" data-cat="B" onclick="switchTab('B')">Catégorie B</div>
+      <div class="tab" data-cat="C" onclick="switchTab('C')">Catégorie C</div>
+      <div class="tab news-tab" data-cat="NEWS" onclick="showNews()">Actualités / Prévention</div>
+      <div class="tab notes-tab" data-cat="NOTES" onclick="showNotes()">Notes personnelles</div>
+    </div>
+  </header>
+  <main class="main">
+    <div id="catBanner"></div>
+    <!-- FLEUR DES ÉMOTIONS -->
+    <section class="emotions-section" id="emotionsSection">
+      <div class="emotions-info">
+        <h2>Fleur des émotions</h2>
+        <div id="selectedEmotion" class="selected-emotion">Cliquez sur une émotion :</div>
+        <div class="emotions-extra">
+          <b>Pourquoi ?</b> Identifier votre émotion, c’est la première étape pour agir : <br>
+          <span style="color:#bdaa19;">Joie</span>, <span style="color:#5678a5;">Tristesse</span>, <span style="color:#d95936;">Colère</span>,
+          <span style="color:#6b59b8;">Peur</span>, <span style="color:#aa8000;">Surprise</span>, <span style="color:#4e9842;">Dégoût</span>, <span>Calme</span>
+        </div>
+      </div>
+      <div class="emotion-flower">
+        <div>
+          <button class="flower-btn joy" onclick="selectEmotion('Joie')">😊<br>Joie</button>
+          <button class="flower-btn surprise" onclick="selectEmotion('Surprise')">😮<br>Surprise</button>
+          <button class="flower-btn sad" onclick="selectEmotion('Tristesse')">😢<br>Tristesse</button>
+        </div>
+        <div>
+          <button class="flower-btn angry" onclick="selectEmotion('Colère')">😡<br>Colère</button>
+          <button class="flower-btn fear" onclick="selectEmotion('Peur')">😨<br>Peur</button>
+          <button class="flower-btn disgust" onclick="selectEmotion('Dégoût')">🤢<br>Dégoût</button>
+        </div>
+        <div>
+          <button class="flower-btn flower-center" onclick="selectEmotion('Calme')">🧘<br>Calme</button>
+        </div>
+      </div>
+    </section>
+    <!-- SYNTHÈSE -->
+    <section class="synthese-section" id="syntheseSection"></section>
+    <!-- SUIVI QUOTIDIEN -->
+    <section class="daily-section" id="dailySection">
+      <h2>Mon suivi quotidien</h2>
+      <form id="dailyForm" onsubmit="saveDay(event)">
+        <label>Date :</label>
+        <input type="date" id="inputDate" required>
+        <label>Comment vous sentez-vous aujourd'hui ?</label>
+        <select id="inputFeeling" required>
+          <option>Très bien</option>
+          <option>Plutôt bien</option>
+          <option>Moyen</option>
+          <option>Fatigué(e)</option>
+          <option>Stressé(e)</option>
+          <option>Triste</option>
+        </select>
+        <label>Qu’est-ce qui a favorisé ou freiné votre journée ?</label>
+        <textarea rows="2" id="inputReason" placeholder="Décrivez vos réussites ou vos freins..."></textarea>
+        <label>Avez-vous besoin d’un conseil ou d’un soutien aujourd’hui ?</label>
+        <textarea rows="1" id="inputNeed" placeholder="Exprimez votre besoin ou question"></textarea>
+        <button type="submit" class="stress-btn">Enregistrer mon suivi</button>
+      </form>
+      <div class="history" id="dailyHistory"></div>
+      <button type="button" class="stress-btn" onclick="resetSuivi()">Réinitialiser mon suivi (catégorie courante)</button>
+      <div style="margin:28px 0 10px 0;">
+        <h3>Graphique d’évolution de votre humeur (7 derniers jours)</h3>
+        <canvas id="moodChart" height="90"></canvas>
+      </div>
+      <div style="margin:40px 0 10px 0;">
+        <h3>Évolution de votre humeur (Moyenne par mois)</h3>
+        <canvas id="monthlyMoodChart" height="90"></canvas>
+      </div>
+    </section>
+    <section class="tips-section" id="tipsSection"></section>
+    <button class="stress-btn" onclick="openModal()">Comprendre le bon/mauvais stress</button>
+    <!-- ACTUALITÉS -->
+    <section class="news-section" id="newsSection">
+      <h2>Actualités / Prévention santé mentale</h2>
+      <ul>
+        <li><b>Juin 2025 :</b> Semaine de prévention du burn-out dans la FPT – <a href="#">en savoir plus</a></li>
+        <li><b>Vidéo :</b> Comprendre les risques psychosociaux – <a href="#">regarder</a></li>
+        <li><b>Outil :</b> Guide PDF “Identifier le bon/mauvais stress” – <a href="#">télécharger</a></li>
+        <li><b>Lecture :</b> Article sur la QVT et la santé mentale au travail – <a href="#">lire l’article</a></li>
+      </ul>
+      <div style="margin-top:24px;">
+        <h3>Fil d’actualités santé mentale (RSS)</h3>
+        <iframe width="360" height="440" src="https://rss.app/embed/v1/carousel/t4AlYBF5NN3q3fC5" frameborder="0"></iframe>
+        <iframe width="360" height="440" src="https://rss.app/embed/v1/carousel/t5KCvWXGzZOeXdEi" frameborder="0"></iframe>
+        <iframe width="360" height="440" src="https://rss.app/embed/v1/carousel/tGOd8hev16sUa8WD" frameborder="0"></iframe>
+      </div>
+      <div style="margin-top:20px;color:#2975c7;font-size:0.97rem;">Proposez des ressources à ajouter : <a href="mailto:prevention@sens.fr">prevention@sens.fr</a></div>
+    </section>
+    <!-- NOTES PERSONNELLES -->
+    <section class="notes-section" id="notesSection">
+      <div class="notes-title">Mes notes personnelles (journal privé)</div>
+      <textarea id="notesText" placeholder="Ajoutez vos remarques, pensées, réussites, conseils à vous-même…"></textarea>
+      <br>
+      <button class="save-notes-btn" onclick="saveNotes()">Sauvegarder mes notes</button>
+      <span id="notesSavedMsg" style="margin-left:18px;color:#55b0a7;font-size:1.02rem;display:none;">💾 Notes sauvegardées !</span>
+    </section>
+    <!-- RESSOURCES & GUIDES PDF + FORMULAIRE SIGNALEMENT -->
+    <section class="ressources-section">
+      <h2>Ressources & contacts utiles</h2>
+      <ul>
+        <li><strong>Écoute psychologique :</strong> 0800 130 000 (service public, confidentiel, gratuit)</li>
+        <li><strong>Médecine du travail :</strong> Dr LAHANG – Prendre contact avec le secretariat.medical@mairie.fr</li>
+        <li><strong>Dispositif d’écoute interne :</strong> Prévention des risques professionnels : Annie BUNNET : a.bunnet@mairiefr</li>
+      </ul>
+      <section id="guides" class="panel">
+        <h2>Guides PDF</h2>
+        <div class="pdf-list">
+          <p><strong>Téléchargez les guides PDF :</strong></p>
+          <ul>
+            <li><a href="2025_PAPRIPACT 2025.pdf" target="_blank">Programme annuel de prévention des risques professionnels et d’amélioration des conditions de travail - 2025</a></li>
+            <li><a href="2025_RASSCT 2024.pdf" target="_blank">Rapport annuel 2024 Bilan de la situation générale de la santé, de la sécurité et des conditions de travail</a></li>
+            <li><a href="Formulaire de signalement.pdf" target="_blank">Formulaire de signalement</a></li>
+          </ul>
+        </div>
+      </section>
+      <section class="ressources-section" style="margin-top:38px; max-width: 750px; margin-left:auto; margin-right:auto;">
+        <div style="background:#e7ffe9;border-radius:13px;box-shadow:0 2px 6px #e1f2e3;padding:18px 22px 15px 22px;">
+          <h3 style="color:#287f50;">📝 Formulaire de signalement – Santé mentale & Risques psychosociaux</h3>
+          <div style="border:2px solid #abd4c7; background:#eafff6; border-radius:10px; padding:15px 18px; margin-bottom:22px;">
+            <strong>Vos informations administratives</strong><br>
+            <label>Nom :</label>
+            <input type="text" id="fm-nom" style="width:96%;" required><br>
+            <label>Prénom :</label>
+            <input type="text" id="fm-prenom" style="width:96%;" required><br>
+            <label>Service :</label>
+            <input type="text" id="fm-service" style="width:96%;" required><br>
+            <label>Date d’entrée dans la collectivité :</label>
+            <input type="date" id="fm-date" style="width:96%;" required><br>
+            <label>Directeur du service :</label>
+            <input type="text" id="fm-directeur" style="width:96%;"><br>
+            <label>Chef de service :</label>
+            <input type="text" id="fm-chef" style="width:96%;"><br>
+            <label>A adresser à :</label>
+            <input type="text" readonly value="Annie BUNNET : a.bunnet@mairie.fr" style="width:96%; background:#fcf6dd;">
+          </div>
+          <form id="signalementForm" style="margin-top:15px;">
+            <label for="fm-fait">1. Décrivez les faits ou la situation vécue (contexte, moment, personnes concernées, etc.) :</label><br>
+            <textarea id="fm-fait" rows="3" style="width:97%;" required></textarea><br>
+            <label for="fm-impact">2. Quel(s) impact(s) cette situation a-t-elle eu sur vous (santé, travail, moral, etc.) ?</label><br>
+            <textarea id="fm-impact" rows="3" style="width:97%;" required></textarea><br>
+            <label for="fm-reaction">3. Qu’avez-vous déjà tenté ou entrepris pour faire face à cette situation ?</label><br>
+            <textarea id="fm-reaction" rows="2" style="width:97%;"></textarea><br>
+            <label for="fm-attente">4. Quel type de soutien ou de solution attendez-vous de la part du dispositif d’écoute ?</label><br>
+            <textarea id="fm-attente" rows="2" style="width:97%;"></textarea><br>
+            <label for="fm-autre">5. Autre remarque ou information utile :</label><br>
+            <textarea id="fm-autre" rows="2" style="width:97%;"></textarea><br>
+            <button type="button" class="stress-btn" onclick="envoyerSignalement()">Envoyer au dispositif d'écoute</button>
+          </form>
+          <div id="fm-succes" style="color:#33995b; font-weight:600; margin-top:15px; display:none;">
+            ✅ Votre signalement a été préparé. Vérifiez vos mails ou copiez/collez le contenu pour l’envoyer à <b>a.bunlet@grand-senonais.fr</b>
+          </div>
+        </div>
+      </section>
+      <div style="font-size:0.96rem;color:#749542;margin-top:8px;">Prendre soin de soi, c’est aussi prendre soin du service public. <b>Votre ressenti compte !</b></div>
+    </section>
+  </main>
+  <!-- Modal stress -->
+  <div class="modal-bg" id="modalBg">
+    <div class="modal-content">
+      <button class="close-modal" onclick="closeModal()">×</button>
+      <h3>Bon stress / Mauvais stress</h3>
+      <p>
+        <b>Le bon stress (eustress)</b><br>
+        - Est ponctuel, motivant, lié à un challenge positif.<br>
+        - Il améliore concentration, créativité et performance.<br>
+        <span style="color:#37b87c;"><b>Exemples :</b></span> lancement de projet, nouvelle mission, évolution de carrière.<br>
+      </p>
+      <p>
+        <b>Le mauvais stress (distress)</b><br>
+        - S’installe dans la durée : surcharge, conflits, manque de reconnaissance.<br>
+        - Provoque anxiété, troubles du sommeil, démotivation, isolement.<br>
+        <span style="color:#c86628;"><b>Exemples :</b></span> surcharge chronique, conflits non résolus, perte de sens.<br>
+      </p>
+      <ul>
+        <li><b>Repérez les signes</b> : fatigue, irritabilité, perte de plaisir à travailler.</li>
+        <li><b>En parler</b> : ne pas s’isoler, demander conseil ou soutien.</li>
+        <li><b>Rituels utiles</b> : micro-pauses, respiration, priorisation, ressources internes.</li>
+      </ul>
+      <p style="margin-top:7px;font-size:0.98rem;color:#889a7e;">
+        ➡️ Prendre soin de votre stress, c’est prendre soin de votre santé mentale et de votre efficacité professionnelle !
+      </p>
+    </div>
+  </div>
+</section>
+<!-- SANTÉ MENTALE AU TRAVAIL – FPT (Fin de la section) -->
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- JS de l’application Santé mentale -->
+<script>
+let currentCat = "A";
+const catBanners = {
+  "A": `<div class="cat-banner cat-A"><span class="cat-icon">👩‍💼</span>Catégorie A – Cadres, Encadrants, Responsables</div>`,
+  "B": `<div class="cat-banner cat-B"><span class="cat-icon">🧑‍🔧</span>Catégorie B – Agents de maîtrise, Techniciens</div>`,
+  "C": `<div class="cat-banner cat-C"><span class="cat-icon">👷</span>Catégorie C – Agents d’exécution, Terrain</div>`
+};
+const tipsByCat = {
+  "A": `<h2>Conseils & Outils – Cadres, Encadrants</h2>
+  <ul>
+    <li><b>Prioriser :</b> Apprenez à distinguer l’urgent de l’important, à planifier votre semaine et à refuser la surcharge injustifiée.</li>
+    <li><b>Déléguer intelligemment :</b> Faites confiance à vos collaborateurs, fixez des objectifs clairs, évitez le micro-management.</li>
+    <li><b>Leadership bienveillant :</b> Valorisez, encouragez, donnez du feedback constructif, montrez l’exemple en prenant soin de vous aussi.</li>
+    <li><b>Prévention de l’isolement :</b> Organisez des temps d’échange informels, pratiquez l’écoute active avec vos équipes.</li>
+    <li><b>Santé du manager :</b> Intégrez des rituels bien-être : cohérence cardiaque, marche, micro-pauses, coaching ou supervision.</li>
+    <li><b>Rappel :</b> Prendre soin de votre équilibre, c’est favoriser la santé de toute l’équipe !</li>
+  </ul>`,
+  "B": `<h2>Conseils & Outils – Agents de maîtrise, Techniciens</h2>
+  <ul>
+    <li><b>Organisez vos priorités :</b> Commencez la journée avec trois missions principales à accomplir.</li>
+    <li><b>Utilisez les outils numériques :</b> To-do lists, Trello, Notion, agendas partagés pour alléger votre charge mentale.</li>
+    <li><b>Demandez de l’aide :</b> Osez solliciter un collègue ou votre responsable dès qu’un blocage survient.</li>
+    <li><b>Pauses de qualité :</b> Déconnectez-vous complètement sur le temps du repas, pratiquez un exercice de respiration ou d’étirement.</li>
+    <li><b>Partagez :</b> Échangez vos astuces de gestion du stress en réunion ou à la pause, soyez solidaire entre collègues.</li>
+    <li><b>Prévention :</b> Repérez les signaux de stress (fatigue, irritabilité) et parlez-en, ne laissez pas s’installer le malaise.</li>
+  </ul>`,
+  "C": `<h2>Conseils & Outils – Agents d’exécution, Terrain</h2>
+  <ul>
+    <li><b>Micro-pauses :</b> 2-3 minutes toutes les heures pour respirer, s’étirer, relâcher la tension.</li>
+    <li><b>Respectez vos limites physiques :</b> N’ayez pas peur de signaler une surcharge ou une difficulté à votre responsable.</li>
+    <li><b>Gestion des situations difficiles :</b> En cas d’agressivité d’un usager, demandez un relais, respirez profondément, débriefez après l’incident.</li>
+    <li><b>Vie d’équipe :</b> Partagez vos ressentis, valorisez les réussites du quotidien, tenez un carnet de fiertés.</li>
+    <li><b>Recours :</b> Sollicitez l’écoute psychologique de la collectivité ou un collègue référent si besoin.</li>
+    <li><b>Astuce :</b> Chaque petit progrès ou sourire partagé compte pour votre bien-être !</li>
+  </ul>`
+};
+function switchTab(cat) {
+  currentCat = cat;
+  document.querySelectorAll('#sante-mentale-fpt .tab').forEach(t => t.classList.remove('active'));
+  document.querySelector('#sante-mentale-fpt .tab[data-cat="'+cat+'"]').classList.add('active');
+  document.getElementById('catBanner').style.display = '';
+  document.getElementById('emotionsSection').style.display = '';
+  document.getElementById('syntheseSection').style.display = '';
+  document.getElementById('dailySection').style.display = '';
+  document.getElementById('tipsSection').style.display = '';
+  document.getElementById('newsSection').classList.remove('active');
+  document.getElementById('notesSection').classList.remove('active');
+  document.getElementById('catBanner').innerHTML = catBanners[cat];
+  let tipsEl = document.getElementById('tipsSection');
+  tipsEl.innerHTML = tipsByCat[cat];
+  tipsEl.className = "tips-section cat-" + cat;
+  showHistory();
+}
+function showNews() {
+  document.querySelectorAll('#sante-mentale-fpt .tab').forEach(t => t.classList.remove('active'));
+  document.querySelector('#sante-mentale-fpt .tab[data-cat="NEWS"]').classList.add('active');
+  document.getElementById('catBanner').style.display = 'none';
+  document.getElementById('emotionsSection').style.display = 'none';
+  document.getElementById('syntheseSection').style.display = 'none';
+  document.getElementById('dailySection').style.display = 'none';
+  document.getElementById('tipsSection').style.display = 'none';
+  document.getElementById('notesSection').classList.remove('active');
+  document.getElementById('newsSection').classList.add('active');
+}
+function showNotes() {
+  document.querySelectorAll('#sante-mentale-fpt .tab').forEach(t => t.classList.remove('active'));
+  document.querySelector('#sante-mentale-fpt .tab[data-cat="NOTES"]').classList.add('active');
+  document.getElementById('catBanner').style.display = 'none';
+  document.getElementById('emotionsSection').style.display = 'none';
+  document.getElementById('syntheseSection').style.display = 'none';
+  document.getElementById('dailySection').style.display = 'none';
+  document.getElementById('tipsSection').style.display = 'none';
+  document.getElementById('newsSection').classList.remove('active');
+  document.getElementById('notesSection').classList.add('active');
+  let txt = localStorage.getItem('FPT_NotesPerso')||"";
+  document.getElementById('notesText').value = txt;
+  document.getElementById('notesSavedMsg').style.display = 'none';
+}
+function saveNotes() {
+  let txt = document.getElementById('notesText').value;
+  localStorage.setItem('FPT_NotesPerso', txt);
+  document.getElementById('notesSavedMsg').style.display = '';
+  setTimeout(()=>{document.getElementById('notesSavedMsg').style.display='none'}, 1800);
+}
+document.addEventListener("DOMContentLoaded", function() {
+  if(document.getElementById('sante-mentale-fpt')) {
+    switchTab("A");
+    showHistory();
+  }
+});
+function selectEmotion(emotion) {
+  document.getElementById('selectedEmotion').textContent = "Vous ressentez : " + emotion;
+}
+function syntheseHumeur(history) {
+  if(!history || !history.length) return "Aucun suivi n’a encore été enregistré cette semaine.";
+  const compte = { "Très bien":0, "Plutôt bien":0, "Moyen":0, "Fatigué(e)":0, "Stressé(e)":0, "Triste":0 };
+  for(let h of history) if(compte[h.feeling]!=null) compte[h.feeling]++;
+  let dominant = Object.entries(compte).sort((a,b)=>b[1]-a[1])[0][0];
+  let txt = `<b>Synthèse :</b> `;
+  if (compte["Très bien"]+compte["Plutôt bien"]>0) {
+    txt += `<span style="color:#399c46;">Jours positifs : ${compte["Très bien"]+compte["Plutôt bien"]}/7</span>. `;
+  }
+  if (compte["Fatigué(e)"]>0||compte["Stressé(e)"]>0) {
+    txt += `<span style="color:#d28a1e;">Fatigue/stress : ${compte["Fatigué(e)"]+compte["Stressé(e)"]} jour(s)</span>. `;
+  }
+  if (compte["Triste"]>0) {
+    txt += `<span style="color:#b23333;">Tristesse : ${compte["Triste"]} jour(s)</span>. `;
+  }
+  txt += `<br><i>État dominant : <b>${dominant}</b>.</i>`;
+  if(compte["Fatigué(e)"]+compte["Stressé(e)"]>=4) txt += `<br><b>⚠️ Pensez à souffler, à demander du soutien ou à réorganiser votre charge.</b>`;
+  return txt;
+}
+function saveDay(e) {
+  e.preventDefault();
+  let date = document.getElementById('inputDate').value;
+  let feeling = document.getElementById('inputFeeling').value;
+  let reason = document.getElementById('inputReason').value;
+  let need = document.getElementById('inputNeed').value;
+  let entry = { date, feeling, reason, need };
+  let storageKey = 'dailyFPT_' + currentCat;
+  let old = JSON.parse(localStorage.getItem(storageKey)||"[]");
+  old.unshift(entry);
+  localStorage.setItem(storageKey, JSON.stringify(old.slice(0,31))); // On stocke un mois pour le graphique mensuel
+  showHistory();
+  document.getElementById('dailyForm').reset();
+  alert("Suivi du jour enregistré !");
+}
+function updateMoodChart(history) {
+  const moods = ["Très bien", "Plutôt bien", "Moyen", "Fatigué(e)", "Stressé(e)", "Triste"];
+  const colors = ["#91d46b", "#b9e97b", "#ffe376", "#ffd39f", "#ffb6b6", "#b6c7ff"];
+  let labels = [];
+  let data = [];
+  for (let i = 6; i >= 0; i--) {
+    if(history[i]) {
+      labels.push(history[i].date.slice(5));
+      data.push(moods.indexOf(history[i].feeling));
+    } else {
+      labels.push("");
+      data.push(null);
+    }
+  }
+  if(window.moodChartObj) window.moodChartObj.destroy();
+  let ctx = document.getElementById('moodChart').getContext('2d');
+  window.moodChartObj = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: labels.reverse(),
+      datasets: [{
+        label: 'État du jour',
+        data: data.reverse(),
+        borderColor: '#5fc572',
+        backgroundColor: '#e7ffe9',
+        spanGaps: true,
+        tension: 0.33,
+        fill: true,
+        pointRadius: 6,
+        pointBackgroundColor: data.map(idx=>idx==null?"#eee":colors[idx]),
+        pointBorderColor: '#5fc572'
+      }]
+    },
+    options: {
+      plugins: {
+        legend: {display: false},
+        tooltip: {
+          callbacks: {
+            label: ctx => moods[ctx.parsed.y] || "Non renseigné"
+          }
+        }
+      },
+      scales: {
+        y: {
+          min: 0,
+          max: moods.length-1,
+          ticks: {
+            callback: val => moods[val] || "",
+            stepSize: 1
+          },
+          title: {display: true, text: "État émotionnel"}
+        }
+      }
+    }
+  });
+}
+function updateMonthlyMoodChart(history) {
+  const moods = ["Très bien", "Plutôt bien", "Moyen", "Fatigué(e)", "Stressé(e)", "Triste"];
+  let monthly = {};
+  for (let h of history) {
+    if (!h.date) continue;
+    let month = h.date.slice(0,7); // "2025-05"
+    let idx = moods.indexOf(h.feeling);
+    if(idx===-1) continue;
+    if (!monthly[month]) monthly[month] = [];
+    monthly[month].push(idx);
+  }
+  let labels = Object.keys(monthly).sort();
+  let data = labels.map(month => {
+    let arr = monthly[month];
+    let avg = arr.reduce((a,b)=>a+b,0) / arr.length;
+    return Math.round(avg*100)/100;
+  });
+  if(window.monthlyMoodChartObj) window.monthlyMoodChartObj.destroy();
+  let ctx = document.getElementById('monthlyMoodChart').getContext('2d');
+  window.monthlyMoodChartObj = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: labels.map(l => l.replace("-","/")),
+      datasets: [{
+        label: 'Humeur moyenne',
+        data: data,
+        backgroundColor: '#ffec99',
+        borderColor: '#afac7a',
+        borderWidth: 2,
+      }]
+    },
+    options: {
+      plugins: {
+        legend: {display: false},
+        tooltip: {
+          callbacks: {
+            label: ctx => {
+              let idx = Math.round(ctx.parsed.y);
+              return 'Moyenne : ' + (moods[idx] || "Non renseigné");
+            }
+          }
+        }
+      },
+      scales: {
+        y: {
+          min: 0,
+          max: moods.length-1,
+          ticks: {
+            callback: val => moods[val] || "",
+            stepSize: 1
+          },
+          title: {display: true, text: "État émotionnel"}
+        }
+      }
+    }
+  });
+}
+function showHistory() {
+  let storageKey = 'dailyFPT_' + currentCat;
+  let history = JSON.parse(localStorage.getItem(storageKey)||"[]");
+  let el = document.getElementById('dailyHistory');
+  let synthese = document.getElementById('syntheseSection');
+  if(history.length === 0) {
+    el.innerHTML = "<i>Aucun suivi enregistré cette semaine.</i>";
+    synthese.innerHTML = "Aucune synthèse disponible : commencez votre suivi ci-dessus.";
+  } else {
+    el.innerHTML = "<b>Historique 7 derniers jours :</b><br>";
+    for(let h of history.slice(0,7)) {
+      el.innerHTML += `<span style="color:#679f2a;font-weight:600;">${h.date}</span>
+        – <b>${h.feeling}</b><br>
+        <span style="color:#aab92a;">${h.reason? "• "+h.reason : ""}</span><br>
+        <span style="color:#3e9256;">${h.need? "• Besoin: "+h.need : ""}</span><br><br>`;
+    }
+    synthese.innerHTML = syntheseHumeur(history.slice(0,7));
+  }
+  updateMoodChart(history);
+  updateMonthlyMoodChart(history);
+}
+function openModal() {
+  document.getElementById('modalBg').classList.add('active');
+}
+function closeModal() {
+  document.getElementById('modalBg').classList.remove('active');
+}
+document.getElementById('modalBg').addEventListener('click', function(e) {
+  if(e.target === this) closeModal();
+});
+function resetSuivi() {
+  if(confirm("Voulez-vous vraiment réinitialiser tout votre historique pour cette catégorie ?")) {
+    localStorage.removeItem('dailyFPT_' + currentCat);
+    showHistory();
+    alert("Historique réinitialisé !");
+  }
+}
+function envoyerSignalement() {
+  // Récupère les valeurs
+  const nom = document.getElementById('fm-nom').value;
+  const prenom = document.getElementById('fm-prenom').value;
+  const service = document.getElementById('fm-service').value;
+  const date = document.getElementById('fm-date').value;
+  const directeur = document.getElementById('fm-directeur').value;
+  const chef = document.getElementById('fm-chef').value;
+  // Questions ouvertes
+  const fait = document.getElementById('fm-fait').value;
+  const impact = document.getElementById('fm-impact').value;
+  const reaction = document.getElementById('fm-reaction').value;
+  const attente = document.getElementById('fm-attente').value;
+  const autre = document.getElementById('fm-autre').value;
+
+  if(!nom || !prenom || !service || !date || !fait || !impact){
+    alert("Merci de remplir tous les champs obligatoires.");
+    return;
+  }
+
+  // Génère le mail pré-rempli
+  let corps =
+    "Nom : "+nom+"\nPrénom : "+prenom+
+    "\nService : "+service+
+    "\nDate d’entrée : "+date+
+    "\nDirecteur du service : "+directeur+
+    "\nChef de service : "+chef+
+    "\n\n1. Faits : "+fait+
+    "\n2. Impact(s) : "+impact+
+    "\n3. Réaction(s) : "+reaction+
+    "\n4. Attente(s) : "+attente+
+    "\n5. Autre : "+autre;
+
+  let mailto = "mailto:a.bunlet@grand-senonais.fr"+
+    "?subject=Signalement%20sant%C3%A9%20mentale%20ou%20RPS"+
+    "&body="+encodeURIComponent(corps);
+
+  // Ouvre le mail client
+  window.open(mailto);
+  document.getElementById("fm-succes").style.display = "block";
+}
+</script>
+
+ <!-- PORFOLIO DESING -->
+<section id="design" class="panel">
+  <h2>Portfolio Design</h2>
+<div class="gallery">
+  <iframe src="Porfolio desing.pdf" width="300" height="420" style="border-radius:10px;border:1.5px solid #ddd;"></iframe>
+  <p>
+    <a href="Porfolio desing.pdf" target="_blank">Télécharger le PDF</a>
+  </p>
+</div>
+
+</section>
+
+ <!-- CONTACT + RDV | Formsubmit (mail : rhstrama@gmail.com) -->
+<section id="contact" class="panel">
+  <style>
+    .contact-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2.5rem;
+      justify-content: center;
+      align-items: flex-start;
+      margin: 2rem 0;
+    }
+    .contact-form, .calendar-contact {
+      background: #f8f8fe;
+      border: 1.5px solid #dbc1f9;
+      border-radius: 14px;
+      box-shadow: 0 2px 8px #c6bbef33;
+      padding: 1.5rem 1.1rem;
+      max-width: 350px;
+      width: 100%;
+    }
+    .contact-form h3, .calendar-contact h4 { margin-top: 0; color: #7357bf; }
+    .contact-form label, .calendar-contact label { font-weight: 500; display: block; margin-bottom: 0.3rem;}
+    .contact-form input, .contact-form textarea,
+    .calendar-contact input, .calendar-contact textarea {
+      width: 100%; padding: 0.55rem; margin-bottom: 1rem;
+      border: 1px solid #d2c3f6; border-radius: 8px;
+      font-size: 1rem; background: #fff;
+    }
+    .contact-form button, .calendar-contact button {
+      background: #7357bf; color: #fff; border: none; border-radius: 9px;
+      padding: 0.6rem 1.4rem; font-size: 1.08rem; font-weight: 600; cursor: pointer;
+      box-shadow: 0 1px 7px #c6bbef77;
+      transition: background 0.2s;
+    }
+    .contact-form button:hover, .calendar-contact button:hover { background: #512d8e; }
+    @media (max-width: 900px) {
+      .contact-wrapper { flex-direction: column; align-items: stretch; }
+    }
+  </style>
+  <div class="contact-wrapper">
+    <form class="contact-form" action="https://formsubmit.co/rhstrama@gmail.com" method="POST">
+      <h3>Formulaire de contact</h3>
+      <label for="nom">Nom :</label>
+      <input type="text" id="nom" name="Nom" required>
+
+      <label for="email">Email :</label>
+      <input type="email" id="email" name="Email" required>
+
+      <label for="telephone">Téléphone :</label>
+      <input type="text" id="telephone" name="Téléphone" pattern="^0[1-9][0-9]{8}$" placeholder="Ex : 0612345678" required>
+
+      <label for="message">Message :</label>
+      <textarea id="message" name="Message" rows="3" required></textarea>
+
+      <!-- Option : rediriger vers une page de remerciement -->
+      <input type="hidden" name="_next" value="https://votresite.fr/merci.html">
+      <button type="submit">Envoyer</button>
+    </form>
+
+    <form class="calendar-contact" action="https://formsubmit.co/rhstrama@gmail.com" method="POST">
+      <h4>Prendre un RDV</h4>
+      <label for="date">Date souhaitée :</label>
+      <input type="date" id="date" name="Date" required>
+
+      <label for="heure">Heure :</label>
+      <input type="time" id="heure" name="Heure" required>
+
+      <label for="rdv-email">Votre Email :</label>
+      <input type="email" id="rdv-email" name="Email" required>
+
+      <label for="rdv-telephone">Téléphone :</label>
+      <input type="text" id="rdv-telephone" name="Téléphone" pattern="^0[1-9][0-9]{8}$" placeholder="Ex : 0650973105" required>
+
+      <label for="rdv-message">Motif (facultatif) :</label>
+      <textarea id="rdv-message" name="Message" rows="2"></textarea>
+
+      <input type="hidden" name="_subject" value="Nouvelle demande de RDV via le site">
+      <input type="hidden" name="_next" value="https://votresite.fr/merci.html">
+      <button type="submit">Demander un RDV</button>
+    </form>
+  </div>
+  <p style="text-align:center; color:#777; font-size:0.95em; margin-top:1.5rem">
+    ✅ Vos informations sont sécurisées • Les demandes arrivent directement dans votre boîte mail.<br>
+    <b>⚡ Pensez à valider l’adresse <u>rhstrama@gmail.com</u> lors du premier envoi (mail de confirmation Formsubmit).</b>
+  </p>
+</section>
+
+
+  <script>
+    // Date/heure
+    function updateDateBox() {
+      const box = document.getElementById('dateBox');
+      const now = new Date();
+      const dateStr = now.toLocaleDateString('fr-FR');
+      const timeStr = now.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+      box.textContent = `🕒 ${dateStr} — ${timeStr}`;
+    }
+    updateDateBox();
+    setInterval(updateDateBox, 1000);
+
+    // Onglets
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const panels = document.querySelectorAll('.panel');
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', function() {
+        tabBtns.forEach(b => b.classList.remove('active'));
+        panels.forEach(p => p.classList.remove('active'));
+        this.classList.add('active');
+        document.getElementById(this.dataset.target).classList.add('active');
+      });
+    });
+
+    // Upload PDF
+    document.getElementById('pdfUpload').addEventListener('change', function(e) {
+      const list = document.getElementById('pdfLinks');
+      for (const file of e.target.files) {
+        const url = URL.createObjectURL(file);
+        const a = document.createElement('a');
+        a.href = url; a.download = file.name; a.textContent = file.name;
+        list.appendChild(a); list.appendChild(document.createElement('br'));
+      }
+    });
+
+    // Contact Form
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      document.getElementById('contactSuccess').style.display = "block";
+      // Ici, intègre l'envoi par mail/SMS selon tes besoins
+    });
+    document.getElementById('btnRdv').addEventListener('click', function() {
+      document.getElementById('rdvSuccess').style.display = "block";
+      // Pour SMS/email réel, intégration API nécessaire
+    });
+
+    // Quiz : exemple de questions (remplace par les tiennes)
+    const quizQuestions = {
+      veille: [
+        { q: "Quel est l’objectif principal d’une veille digitale ?", a: "Identifier les tendances émergentes", r: ["Améliorer l’existant", "Faire uniquement de la pub", "Automatiser tous les processus"], exp: ["Voir section Objectifs", "Section Objectifs", "Section Objectifs"] },
+        // ... Mets 9 questions, avec explications "Voir section <bloc>" selon le sujet.
+      ],
+      // Fais de même pour chaque thème : support, acquisition, solution, etc.
+    };
+    document.getElementById('quizSelect').addEventListener('change', function() {
+      const val = this.value;
+      const quizDiv = document.getElementById('quizContainer');
+      quizDiv.innerHTML = "";
+      if (!quizQuestions[val]) return;
+      quizQuestions[val].forEach((q, i) => {
+        let html = `<div><strong>Q${i+1}.</strong> ${q.q}<br>`;
+        html += `<label><input name="q${i}" type="radio"> ${q.a} <span style="color:green">[Bonne réponse]</span></label><br>`;
+        q.r.forEach((wrong, idx) => {
+          html += `<label><input name="q${i}" type="radio"> ${wrong} <span style="color:#b76;">[Faux] — ${q.exp[idx]}</span></label><br>`;
+        });
+        html += "</div><br>";
+        quizDiv.innerHTML += html;
+      });
+    });
+  </script>
+</body>
+</html>
+<style>
+/* Style simple pour le quiz */
+#quiz .quiz-question {
+  background: #f8f8ff;
+  border-radius: 12px;
+  box-shadow: 0 1px 8px #e7e6fc;
+  padding: 14px 16px;
+  margin: 20px 0;
+}
+#quiz .quiz-question ul {
+  list-style: none;
+  padding: 0;
+}
+#quiz .quiz-question li {
+  margin-bottom: 7px;
+}
+#quiz .quiz-feedback {
+  margin-top: 6px;
+  font-size: 0.95em;
+}
+#quiz .quiz-result {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin: 18px 0 10px 0;
+  color: #1a8754;
+}
+#quiz .quiz-submit-btn, #quiz .quiz-download-btn {
+  margin: 14px 8px 0 0;
+  background: #7a5ef8;
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 1em;
+  box-shadow: 0 2px 8px #e0e0fa;
+  transition: background 0.2s;
+}
+#quiz .quiz-submit-btn:hover, #quiz .quiz-download-btn:hover {
+  background: #5837e7;
+}
+#quiz select {
+  margin: 12px 0;
+  font-size: 1em;
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+</style>
