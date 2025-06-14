@@ -2946,8 +2946,9 @@ function envoyerSignalement() {
       <label for="message">Message :</label>
       <textarea id="message" name="Message" rows="3" required></textarea>
 
-      <!-- Redirection vers VOTRE site après soumission -->
       <input type="hidden" name="_next" value="https://angie89100.github.io/Strategie-et-management/merci.html">
+      <input type="text" name="_honey" style="display:none">
+      <input type="hidden" name="_captcha" value="false">
       <button type="submit">Envoyer</button>
     </form>
 
@@ -2969,8 +2970,9 @@ function envoyerSignalement() {
       <textarea id="rdv-message" name="Message" rows="2"></textarea>
 
       <input type="hidden" name="_subject" value="Nouvelle demande de RDV via le site">
-      <!-- Redirection vers VOTRE site après soumission -->
       <input type="hidden" name="_next" value="https://angie89100.github.io/Strategie-et-management/merci.html">
+      <input type="text" name="_honey" style="display:none">
+      <input type="hidden" name="_captcha" value="false">
       <button type="submit">Demander un RDV</button>
     </form>
   </div>
