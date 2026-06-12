@@ -1,11 +1,10 @@
-from pathlib import Path
-
-html = r'''<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Angélique Boulle — Portfolio stratégie digitale, RH & changement</title>
+
   <style>
     :root{
       --ink:#1f2937;
@@ -23,6 +22,7 @@ html = r'''<!DOCTYPE html>
 
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
+
     body{
       margin:0;
       font-family:Arial,Helvetica,sans-serif;
@@ -32,13 +32,10 @@ html = r'''<!DOCTYPE html>
       background-attachment:fixed;
     }
 
-    a{color:inherit}
-
     .hero{
       padding:42px 18px 28px;
-      background:rgba(255,255,255,.78);
+      background:rgba(255,255,255,.82);
       border-bottom:1px solid rgba(255,255,255,.9);
-      backdrop-filter:blur(10px);
     }
 
     .hero-inner{
@@ -96,7 +93,7 @@ html = r'''<!DOCTYPE html>
       box-shadow:var(--shadow);
     }
 
-    .hero-card .quote{
+    .quote{
       font-size:1.1rem;
       font-style:italic;
       color:#3e3278;
@@ -138,9 +135,8 @@ html = r'''<!DOCTYPE html>
       gap:8px;
       justify-content:center;
       padding:12px;
-      background:rgba(255,255,255,.92);
+      background:rgba(255,255,255,.94);
       border-bottom:1px solid var(--line);
-      backdrop-filter:blur(10px);
     }
 
     .tab-btn{
@@ -159,7 +155,7 @@ html = r'''<!DOCTYPE html>
 
     .panel{
       display:none;
-      background:rgba(255,255,255,.9);
+      background:rgba(255,255,255,.92);
       border:1px solid rgba(255,255,255,.95);
       border-radius:25px;
       padding:28px;
@@ -168,7 +164,12 @@ html = r'''<!DOCTYPE html>
     }
 
     .panel.active{display:block}
-    .lead{color:var(--muted);font-size:1.06rem;max-width:940px}
+
+    .lead{
+      color:var(--muted);
+      font-size:1.06rem;
+      max-width:940px;
+    }
 
     .grid{
       display:grid;
@@ -241,18 +242,22 @@ html = r'''<!DOCTYPE html>
     }
 
     .doc-preview{
-      height:330px;
-      background:linear-gradient(135deg,#f5f0ff,#eefbf1);
+      height:360px;
+      background:#f7f3ff;
       border-bottom:1px solid var(--line);
       overflow:hidden;
+      display:flex;
+      align-items:center;
+      justify-content:center;
     }
 
+    .doc-preview img,
     .doc-preview iframe{
       width:100%;
       height:100%;
       border:0;
-      display:block;
-      background:#f7f7fb;
+      object-fit:contain;
+      background:#fff;
     }
 
     .doc-body{
@@ -273,7 +278,11 @@ html = r'''<!DOCTYPE html>
       color:#3f3600;
     }
 
-    .doc-body p{color:var(--muted);margin:0;flex:1}
+    .doc-body p{
+      color:var(--muted);
+      margin:0;
+      flex:1;
+    }
 
     .doc-actions{
       display:flex;
@@ -310,272 +319,44 @@ html = r'''<!DOCTYPE html>
 </head>
 
 <body>
-  <header class="hero">
-    <div class="hero-inner">
-      <div>
-        <h1>Angélique Boulle</h1>
-        <p class="subtitle">Portfolio professionnel — stratégie digitale, ressources humaines, innovation publique et management du changement.</p>
-        <div class="pill-row">
-          <span class="pill">Stratégie digitale</span>
-          <span class="pill">Ressources humaines</span>
-          <span class="pill">Conduite du changement</span>
-          <span class="pill">Secteur public local</span>
-        </div>
-        <div class="actions">
-          <button class="btn" data-open="documents">Voir les documents</button>
-          <a class="btn secondary" href="https://angie89100.github.io/Terri-Competences" target="_blank" rel="noopener">Ouvrir Terri-Compétences</a>
-        </div>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div>
+      <h1>Angélique Boulle</h1>
+      <p class="subtitle">
+        Portfolio professionnel — stratégie digitale, ressources humaines, innovation publique et management du changement.
+      </p>
+
+      <div class="pill-row">
+        <span class="pill">Stratégie digitale</span>
+        <span class="pill">Ressources humaines</span>
+        <span class="pill">Conduite du changement</span>
+        <span class="pill">Secteur public local</span>
       </div>
-      <aside class="hero-card">
-        <h3>Positionnement</h3>
-        <p>Transformer les besoins métiers en solutions concrètes : tutoriels, guides, supports numériques, outils RH, méthodes de conduite du changement et communication digitale.</p>
-        <p class="quote">« Créer son avenir, c’est oser franchir le pas chaque jour. »</p>
-      </aside>
+
+      <div class="actions">
+        <button class="btn" data-open="documents">Voir les documents</button>
+        <a class="btn secondary" href="https://angie89100.github.io/Terri-Competences" target="_blank" rel="noopener">
+          Ouvrir Terri-Compétences
+        </a>
+      </div>
     </div>
-  </header>
 
-  <nav class="tabs" aria-label="Navigation principale">
-    <button class="tab-btn active" data-target="about">À propos</button>
-    <button class="tab-btn" data-target="competences">Compétences</button>
-    <button class="tab-btn" data-target="projets">Projets</button>
-    <button class="tab-btn" data-target="documents">Documents</button>
-    <button class="tab-btn" data-target="terri">Terri-Compétences</button>
-    <button class="tab-btn" data-target="contact">Contact</button>
-  </nav>
+    <aside class="hero-card">
+      <h3>Positionnement</h3>
+      <p>
+        Transformer les besoins métiers en solutions concrètes : tutoriels, guides, supports numériques,
+        outils RH, méthodes de conduite du changement et communication digitale.
+      </p>
+      <p class="quote">« Créer son avenir, c’est oser franchir le pas chaque jour. »</p>
+    </aside>
+  </div>
+</header>
 
-  <main>
-    <section id="about" class="panel active">
-      <h2>À propos</h2>
-      <p class="lead">Profil hybride à la croisée des ressources humaines, de la stratégie digitale et de la conduite du changement. L’objectif : concevoir des supports utiles, clairs et directement exploitables pour les équipes, les usagers et les décideurs.</p>
-      <div class="grid">
-        <div class="card"><h3>Identité professionnelle</h3><p>Une approche opérationnelle : analyser, structurer, créer, tester, améliorer.</p></div>
-        <div class="card"><h3>Valeur ajoutée</h3><p>Faire le lien entre les besoins terrain, les outils numériques et les objectifs de performance collective.</p></div>
-        <div class="card"><h3>Publics visés</h3><p>Collectivités, services RH, communication, managers, agents et candidats à la fonction publique territoriale.</p></div>
-      </div>
-      <div class="stats">
-        <div class="stat">10 PDF visibles</div>
-        <div class="stat">3 diplômes / certifications</div>
-        <div class="stat">2 guides professionnels</div>
-        <div class="stat">5 réalisations portfolio</div>
-      </div>
-    </section>
-
-    <section id="competences" class="panel">
-      <h2>Compétences clés</h2>
-      <p class="lead">Les compétences sont présentées de manière lisible pour une candidature, un entretien ou une présentation de projet.</p>
-      <div class="grid">
-        <div class="card"><h3>Stratégie digitale</h3><ul><li>Veille innovation</li><li>Supports numériques</li><li>Campagnes digitales</li><li>Indicateurs et ROI</li></ul></div>
-        <div class="card"><h3>Ressources humaines</h3><ul><li>Gestion administrative</li><li>Formation et compétences</li><li>Dialogue social</li><li>Prévention RPS</li></ul></div>
-        <div class="card"><h3>Management du changement</h3><ul><li>Diagnostic</li><li>Communication interne</li><li>Accompagnement des équipes</li><li>Évaluation de l’adoption</li></ul></div>
-        <div class="card"><h3>Production de contenus</h3><ul><li>Guides pratiques</li><li>Magazine CV</li><li>Formulaires</li><li>Supports pédagogiques</li></ul></div>
-      </div>
-    </section>
-
-    <section id="projets" class="panel">
-      <h2>Projets et réalisations</h2>
-      <p class="lead">Cette partie valorise les réalisations sous l’angle des compétences transférables : analyse, conception, formalisation, pédagogie, structuration et communication.</p>
-      <div class="grid">
-        <div class="card"><h3>Guides pratiques</h3><p>Création de supports pédagogiques pour rendre la transformation digitale et RH plus accessible.</p></div>
-        <div class="card"><h3>Formulaire RPS</h3><p>Formalisation d’un support de signalement santé mentale et risques psychosociaux.</p></div>
-        <div class="card"><h3>Magazine CV</h3><p>Présentation différenciante du parcours, des compétences et de la vision professionnelle.</p></div>
-        <div class="card"><h3>Terri-Compétences</h3><p>Prototype orienté action publique locale, compétences territoriales et préparation de candidatures.</p></div>
-      </div>
-    </section>
-
-    <section id="documents" class="panel">
-      <h2>Documents intégrés</h2>
-      <p class="lead">Les documents PDF sont affichés directement dans les cartes. Les boutons permettent aussi de les ouvrir en grand ou de les télécharger.</p>
-
-      <div class="doc-toolbar">
-        <button class="filter-btn active" data-filter="Tous">Tous</button>
-        <button class="filter-btn" data-filter="Diplômes">Diplômes</button>
-        <button class="filter-btn" data-filter="Guides">Guides</button>
-        <button class="filter-btn" data-filter="Réalisations">Réalisations</button>
-      </div>
-
-      <div class="doc-grid">
-
-        <article class="doc-card" data-category="Diplômes">
-          <div class="doc-preview"><iframe src="mba-strategie-innovation-digitale.pdf#page=1" title="Aperçu MBA Stratégie et Innovation Digitale"></iframe></div>
-          <div class="doc-body">
-            <span class="doc-badge">Diplômes</span>
-            <h3>Diplôme — MBA Stratégie & Innovation Digitale</h3>
-            <p>Diplôme niveau 7 : expert en stratégie et développement digital.</p>
-            <div class="doc-actions">
-              <a class="btn btn-small" href="mba-strategie-innovation-digitale.pdf" target="_blank" rel="noopener">Consulter</a>
-              <a class="btn btn-small ghost" href="mba-strategie-innovation-digitale.pdf" download>Télécharger</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="doc-card" data-category="Diplômes">
-          <div class="doc-preview"><iframe src="responsable-ressources-humaines.pdf#page=1" title="Aperçu Responsable des Ressources Humaines"></iframe></div>
-          <div class="doc-body">
-            <span class="doc-badge">Diplômes</span>
-            <h3>Diplôme — Responsable des Ressources Humaines</h3>
-            <p>Titre RH pour les candidatures RH, gestion administrative, recrutement et accompagnement.</p>
-            <div class="doc-actions">
-              <a class="btn btn-small" href="responsable-ressources-humaines.pdf" target="_blank" rel="noopener">Consulter</a>
-              <a class="btn btn-small ghost" href="responsable-ressources-humaines.pdf" download>Télécharger</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="doc-card" data-category="Diplômes">
-          <div class="doc-preview"><iframe src="certificat-management-changement.pdf#page=1" title="Aperçu Certification Management du changement"></iframe></div>
-          <div class="doc-body">
-            <span class="doc-badge">Diplômes</span>
-            <h3>Certification — Conseil en organisation et management du changement</h3>
-            <p>Certification pour démontrer l’accompagnement des transformations et des réorganisations.</p>
-            <div class="doc-actions">
-              <a class="btn btn-small" href="certificat-management-changement.pdf" target="_blank" rel="noopener">Consulter</a>
-              <a class="btn btn-small ghost" href="certificat-management-changement.pdf" download>Télécharger</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="doc-card" data-category="Guides">
-          <div class="doc-preview"><iframe src="guide-atelier-transformation-digitale-rh-management.pdf#page=1" title="Aperçu Guide Atelier transformation digitale"></iframe></div>
-          <div class="doc-body">
-            <span class="doc-badge">Guides</span>
-            <h3>Guide — Atelier transformation digitale, RH et management</h3>
-            <p>Support complet d’atelier : méthode, activités, check-lists et plan d’action.</p>
-            <div class="doc-actions">
-              <a class="btn btn-small" href="guide-atelier-transformation-digitale-rh-management.pdf" target="_blank" rel="noopener">Consulter</a>
-              <a class="btn btn-small ghost" href="guide-atelier-transformation-digitale-rh-management.pdf" download>Télécharger</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="doc-card" data-category="Guides">
-          <div class="doc-preview"><iframe src="guide-7-cles-transformation-digitale-rh.pdf#page=1" title="Aperçu Guide Les 7 clés"></iframe></div>
-          <div class="doc-body">
-            <span class="doc-badge">Guides</span>
-            <h3>Guide — Les 7 clés de la transformation digitale et RH</h3>
-            <p>Guide pédagogique pour comprendre et réussir une transformation digitale et RH.</p>
-            <div class="doc-actions">
-              <a class="btn btn-small" href="guide-7-cles-transformation-digitale-rh.pdf" target="_blank" rel="noopener">Consulter</a>
-              <a class="btn btn-small ghost" href="guide-7-cles-transformation-digitale-rh.pdf" download>Télécharger</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="doc-card" data-category="Réalisations">
-          <div class="doc-preview"><iframe src="Magazine-CV.pdf#page=1" title="Aperçu Magazine CV"></iframe></div>
-          <div class="doc-body">
-            <span class="doc-badge">Réalisations</span>
-            <h3>Magazine CV — Parcours, compétences et vision</h3>
-            <p>Magazine professionnel présentant le parcours, les compétences et la vision digitale.</p>
-            <div class="doc-actions">
-              <a class="btn btn-small" href="Magazine-CV.pdf" target="_blank" rel="noopener">Consulter</a>
-              <a class="btn btn-small ghost" href="Magazine-CV.pdf" download>Télécharger</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="doc-card" data-category="Réalisations">
-          <div class="doc-preview"><iframe src="conception-1.pdf#page=1" title="Aperçu Conception 1"></iframe></div>
-          <div class="doc-body">
-            <span class="doc-badge">Réalisations</span>
-            <h3>Réalisation — Conception 1</h3>
-            <p>Production de conception professionnelle à valoriser dans le portfolio.</p>
-            <div class="doc-actions">
-              <a class="btn btn-small" href="conception-1.pdf" target="_blank" rel="noopener">Consulter</a>
-              <a class="btn btn-small ghost" href="conception-1.pdf" download>Télécharger</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="doc-card" data-category="Réalisations">
-          <div class="doc-preview"><iframe src="conception-2.pdf#page=1" title="Aperçu Conception 2"></iframe></div>
-          <div class="doc-body">
-            <span class="doc-badge">Réalisations</span>
-            <h3>Réalisation — Conception 2</h3>
-            <p>Support de conception et de formalisation.</p>
-            <div class="doc-actions">
-              <a class="btn btn-small" href="conception-2.pdf" target="_blank" rel="noopener">Consulter</a>
-              <a class="btn btn-small ghost" href="conception-2.pdf" download>Télécharger</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="doc-card" data-category="Réalisations">
-          <div class="doc-preview"><iframe src="conception-3.pdf#page=1" title="Aperçu Conception 3"></iframe></div>
-          <div class="doc-body">
-            <span class="doc-badge">Réalisations</span>
-            <h3>Réalisation — Conception 3</h3>
-            <p>Production démontrant la capacité de structuration et de conception.</p>
-            <div class="doc-actions">
-              <a class="btn btn-small" href="conception-3.pdf" target="_blank" rel="noopener">Consulter</a>
-              <a class="btn btn-small ghost" href="conception-3.pdf" download>Télécharger</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="doc-card" data-category="Réalisations">
-          <div class="doc-preview"><iframe src="formulaire-sante-travail-rps.pdf#page=1" title="Aperçu Formulaire RPS"></iframe></div>
-          <div class="doc-body">
-            <span class="doc-badge">Réalisations</span>
-            <h3>Formulaire — Santé mentale & risques psychosociaux</h3>
-            <p>Formulaire de signalement interne consacré à la santé mentale au travail et aux RPS.</p>
-            <div class="doc-actions">
-              <a class="btn btn-small" href="formulaire-sante-travail-rps.pdf" target="_blank" rel="noopener">Consulter</a>
-              <a class="btn btn-small ghost" href="formulaire-sante-travail-rps.pdf" download>Télécharger</a>
-            </div>
-          </div>
-        </article>
-
-      </div>
-    </section>
-
-    <section id="terri" class="panel">
-      <h2>Terri-Compétences</h2>
-      <div class="project-link">
-        <h3>Prototype compétences territoriales</h3>
-        <p class="lead">Terri-Compétences est un espace destiné à valoriser l’action publique locale, les compétences territoriales, la préparation des candidatures et la compréhension des métiers des collectivités.</p>
-        <a class="btn secondary" href="https://angie89100.github.io/Terri-Competences" target="_blank" rel="noopener">Ouvrir le prototype Terri-Compétences</a>
-      </div>
-    </section>
-
-    <section id="contact" class="panel">
-      <h2>Contact</h2>
-      <div class="contact-grid">
-        <div class="card"><h3>Objectif du portfolio</h3><p>Présenter un profil professionnel complet : RH, digital, management du changement et secteur public local.</p></div>
-        <div class="card"><h3>Documents</h3><p>Les diplômes, guides et réalisations peuvent être consultés ou téléchargés depuis la rubrique Documents.</p><button class="btn ghost" data-open="documents">Accéder aux documents</button></div>
-      </div>
-    </section>
-  </main>
-
-  <footer>© Angélique Boulle — Portfolio stratégie digitale, RH & innovation publique</footer>
-
-  <script>
-    const buttons=[...document.querySelectorAll('.tab-btn')];
-    const panels=[...document.querySelectorAll('.panel')];
-
-    function openPanel(id){
-      panels.forEach(p=>p.classList.toggle('active',p.id===id));
-      buttons.forEach(b=>b.classList.toggle('active',b.dataset.target===id));
-      window.scrollTo({top:0,behavior:'smooth'});
-    }
-
-    buttons.forEach(btn=>btn.addEventListener('click',()=>openPanel(btn.dataset.target)));
-    document.querySelectorAll('[data-open]').forEach(el=>el.addEventListener('click',()=>openPanel(el.dataset.open)));
-
-    const filterBtns=[...document.querySelectorAll('.filter-btn')];
-    const docCards=[...document.querySelectorAll('.doc-card')];
-
-    filterBtns.forEach(btn=>btn.addEventListener('click',()=>{
-      filterBtns.forEach(b=>b.classList.remove('active'));
-      btn.classList.add('active');
-      const f=btn.dataset.filter;
-      docCards.forEach(card=>{
-        card.style.display=(f==='Tous'||card.dataset.category===f)?'flex':'none';
-      });
-    }));
-  </script>
-</body>
-</html>
-'''
-path = Path('/mnt/data/index_html_entier_pdf_visibles.html')
-path.write_text(html, encoding='utf-8')
-print(path)
+<nav class="tabs">
+  <button class="tab-btn active" data-target="about">À propos</button>
+  <button class="tab-btn" data-target="competences">Compétences</button>
+  <button class="tab-btn" data-target="projets">Projets</button>
+  <button class="tab-btn" data-target="documents">Documents</button>
+  <button class
